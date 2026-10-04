@@ -753,10 +753,9 @@ footer .lg{height:28px}
       <p class="lede"><span class="en">Choose what you need and answer a short survey. Your request goes to Noureldin Orfali and Mohammad Tabshi, and the right consultant replies with a clear next step.</span><span class="ar">اختر ما تحتاجه وأجب عن استبيان قصير. يصل طلبك إلى نورالدين أورفلي ومحمد الطبشي، ويتواصل معك المستشار المناسب بخطوة واضحة.</span></p>
     </div>
     <div class="sv-grid" id="svGrid"></div>
-    <form class="sv-static" id="svStatic" action="https://formsubmit.co/norfali@franers.com" method="POST">
-      <input type="hidden" name="_cc" value="mtabshi@franers.com">
-      <input type="hidden" name="_subject" value="Franers website inquiry">
-      <input type="hidden" name="_template" value="box">
+    <form class="sv-static" id="svStatic" name="franers-survey" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <div hidden><label>Leave this field empty: <input name="bot-field"></label></div>
+      <input type="hidden" name="survey" value="General inquiry">
       <div class="fields">
         <div class="field"><label for="s-name"><span class="en">Full name</span><span class="ar">الاسم الكامل</span> *</label><input id="s-name" name="name" required autocomplete="name"></div>
         <div class="field"><label for="s-phone"><span class="en">Mobile number</span><span class="ar">رقم الجوال</span> *</label><input id="s-phone" name="phone" required inputmode="tel" autocomplete="tel" dir="ltr"></div>
@@ -765,6 +764,34 @@ footer .lg{height:28px}
         <div class="field full"><label for="s-svc"><span class="en">Service needed</span><span class="ar">الخدمة المطلوبة</span> *</label><select id="s-svc" name="service" required><option value="">Select / اختر</option><option>New brand creation – إنشاء علامة تجارية جديدة</option><option>Franchise development (Full / Partial Kit) – تطوير الامتياز</option><option>Buy a franchise – امتلاك امتياز</option><option>F&amp;B consultancy – استشارات الأغذية والمشروبات</option><option>Profitability Booster – معزّز الربحية</option><option>Executive advisory – الاستشارات التنفيذية</option><option>Concept survey &amp; solutions – تقييم العلامة التجارية والحلول</option><option>Franers Academy – أكاديمية فرانرز</option><option>Other – أخرى</option></select></div>
         <div class="field full"><label for="s-msg"><span class="en">Tell us about your project</span><span class="ar">حدّثنا عن مشروعك</span></label><textarea id="s-msg" name="message" rows="4"></textarea></div>
       </div>
+      <input type="hidden" name="company">
+      <input type="hidden" name="city">
+      <input type="hidden" name="need">
+      <input type="hidden" name="seg">
+      <input type="hidden" name="br">
+      <input type="hidden" name="msg">
+      <input type="hidden" name="stage">
+      <input type="hidden" name="budget">
+      <input type="hidden" name="svc">
+      <input type="hidden" name="kit">
+      <input type="hidden" name="yrs">
+      <input type="hidden" name="tm">
+      <input type="hidden" name="mk">
+      <input type="hidden" name="when">
+      <input type="hidden" name="exp">
+      <input type="hidden" name="ch">
+      <input type="hidden" name="model">
+      <input type="hidden" name="rev">
+      <input type="hidden" name="cc">
+      <input type="hidden" name="sys">
+      <input type="hidden" name="size">
+      <input type="hidden" name="obj">
+      <input type="hidden" name="fee">
+      <input type="hidden" name="mod">
+      <input type="hidden" name="team">
+      <input type="hidden" name="roles">
+      <input type="hidden" name="fmt">
+      <input type="hidden" name="lng">
       <button class="btn btn-primary" type="submit"><span class="en">Send request</span><span class="ar">أرسل الطلب</span></button>
     </form>
   </div>
@@ -820,7 +847,7 @@ footer .lg{height:28px}
 <div class="sv-overlay" id="svOverlay" hidden>
   <div class="sv-box" role="dialog" aria-modal="true" aria-labelledby="svTitle">
     <div class="sv-head"><div><p class="eyebrow" style="color:var(--sky)"><span class="en">Franers survey</span><span class="ar">استبيان فرانرز</span></p><h3 class="display" id="svTitle"></h3></div><button class="sv-close" id="svClose" type="button" aria-label="Close">×</button></div>
-    <form id="svForm" novalidate style="border:0;padding:0;background:none"></form>
+    <form id="svForm" name="franers-survey" method="POST" novalidate style="border:0;padding:0;background:none"></form>
     <div class="summary" id="svResult" hidden>
       <p id="svStatus" style="color:var(--ink);font-weight:500"></p>
       <pre id="svSum"></pre>
@@ -981,9 +1008,7 @@ const clients=["alRomansiah","Loaded Smokehouse","Chef","Snack & Such","Cup & Co
 document.getElementById('wall').innerHTML=clients.map(c=>`<span>${c.replace(/&/g,'&amp;')}</span>`).join('');
 
 /* ---------- surveys ---------- */
-/* To send submissions automatically from the live site, set FORM_ENDPOINT to a form-to-email service URL
-   (for example a Formspree or FormSubmit endpoint) that forwards to both addresses below. */
-const FORM_ENDPOINT='https://formsubmit.co/ajax/norfali@franers.com';
+const FORM_NAME='franers-survey';
 const TO=['norfali@franers.com','mtabshi@franers.com'];
 const ROLES=[['Owner / founder','مالك / مؤسس'],['Executive / manager','تنفيذي / مدير'],['Investor','مستثمر'],['Franchisee','صاحب امتياز'],['Starting a new concept','رائد أعمال بعلامة تجارية جديدة'],['Other','أخرى']];
 const CITY=[['Riyadh','الرياض'],['Jeddah','جدة'],['Eastern Province','المنطقة الشرقية'],['Makkah / Madinah','مكة المكرمة / المدينة المنورة'],['Other city in KSA','مدينة أخرى في المملكة'],['Another GCC country','دولة خليجية أخرى']];
@@ -1053,29 +1078,33 @@ function renderLaunch(){
 }
 function field(q){
   const lab=`${esc(T(q.en,q.ar))}${q.req?' <span class="req">*</span>':''}`;
-  if(q.type==='select') return `<div class="sv-q"><label for="q-${q.id}">${lab}</label><select id="q-${q.id}" name="${q.id}" ${q.req?'required':''}><option value="">${T('Select','اختر')}</option>${q.o.map((o,i)=>`<option value="${i}">${esc(T(o[0],o[1]))}</option>`).join('')}</select></div>`;
-  if(q.type==='multi') return `<fieldset class="sv-q"><legend class="ql">${lab}</legend><div class="opts">${q.o.map((o,i)=>`<div class="opt"><input type="checkbox" id="q-${q.id}-${i}" name="${q.id}" value="${i}"><label for="q-${q.id}-${i}">${esc(T(o[0],o[1]))}</label></div>`).join('')}</div></fieldset>`;
+  if(q.type==='select') return `<div class="sv-q"><label for="q-${q.id}">${lab}</label><select id="q-${q.id}" name="${q.id}" ${q.req?'required':''}><option value="">${T('Select','اختر')}</option>${q.o.map(o=>`<option value="${esc(T(o[0],o[1]))}">${esc(T(o[0],o[1]))}</option>`).join('')}</select></div>`;
+  if(q.type==='multi') return `<fieldset class="sv-q"><legend class="ql">${lab}</legend><div class="opts">${q.o.map((o,i)=>`<div class="opt"><input type="checkbox" id="q-${q.id}-${i}" name="${q.id}" value="${esc(T(o[0],o[1]))}"><label for="q-${q.id}-${i}">${esc(T(o[0],o[1]))}</label></div>`).join('')}</div></fieldset>`;
   return `<div class="sv-q field full"><label for="q-${q.id}">${lab}</label><textarea id="q-${q.id}" name="${q.id}" rows="3"></textarea></div>`;
 }
 function openSurvey(key,opts={}){
   curSurvey=SURVEYS[key]?key:'general'; preset=opts; lastFocus=document.activeElement;
   const S=SURVEYS[curSurvey];
   document.getElementById('svTitle').textContent=T(S.en,S.ar);
-  const prim=`<p class="sv-sec">${T('Your details','بياناتك')}</p>
+  const prim=`<input type="hidden" name="form-name" value="${FORM_NAME}">
+  <input type="hidden" name="survey" value="${esc(S.en)}">
+  <input type="hidden" name="message" value="">
+  <input type="text" name="bot-field" autocomplete="off" tabindex="-1" hidden>
+  <p class="sv-sec">${T('Your details','بياناتك')}</p>
   <div class="fields">
    <div class="field"><label for="p-name">${T('Full name','الاسم الكامل')} <span class="req">*</span></label><input id="p-name" name="name" autocomplete="name" required></div>
    <div class="field"><label for="p-phone">${T('Mobile number','رقم الجوال')} <span class="req">*</span></label><input id="p-phone" name="phone" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="+966 5x xxx xxxx" required></div>
    <div class="field"><label for="p-email">${T('Email','البريد الإلكتروني')} <span class="req">*</span></label><input id="p-email" name="email" type="email" autocomplete="email" dir="ltr" required></div>
-   <div class="field"><label for="p-role">${T('Your role','صفتك')} <span class="req">*</span></label><select id="p-role" name="role" required style="font:400 15px var(--body);color:var(--text);background:var(--chip);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%"><option value="">${T('Select','اختر')}</option>${ROLES.map((o,i)=>`<option value="${i}">${esc(T(o[0],o[1]))}</option>`).join('')}</select></div>
+   <div class="field"><label for="p-role">${T('Your role','صفتك')} <span class="req">*</span></label><select id="p-role" name="role" required style="font:400 15px var(--body);color:var(--text);background:var(--chip);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%"><option value="">${T('Select','اختر')}</option>${ROLES.map(o=>`<option value="${esc(T(o[0],o[1]))}">${esc(T(o[0],o[1]))}</option>`).join('')}</select></div>
    <div class="field"><label for="p-co">${T('Company / brand','الشركة / العلامة التجارية')}</label><input id="p-co" name="company" autocomplete="organization"></div>
-   <div class="field"><label for="p-city">${T('City','المدينة')}</label><select id="p-city" name="city" style="font:400 15px var(--body);color:var(--text);background:var(--chip);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%"><option value="">${T('Select','اختر')}</option>${CITY.map((o,i)=>`<option value="${i}">${esc(T(o[0],o[1]))}</option>`).join('')}</select></div>
+   <div class="field"><label for="p-city">${T('City','المدينة')}</label><select id="p-city" name="city" style="font:400 15px var(--body);color:var(--text);background:var(--chip);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%"><option value="">${T('Select','اختر')}</option>${CITY.map(o=>`<option value="${esc(T(o[0],o[1]))}">${esc(T(o[0],o[1]))}</option>`).join('')}</select></div>
   </div>
   <p class="sv-sec">${T('About your request','تفاصيل طلبك')}</p>
   ${S.q.map(field).join('')}
   <p class="err" id="svErr" hidden></p>
   <button class="btn btn-primary" type="submit" style="justify-self:start">${T('Submit request','أرسل الطلب')}</button>`;
   sform.innerHTML=prim; sform.hidden=false; sres.hidden=true;
-  if(curSurvey==='franchise'&&opts.kit){const k=document.getElementById('q-kit'); if(k) k.value=opts.kit==='partial'?'1':'0';}
+  if(curSurvey==='franchise'&&opts.kit){const k=document.getElementById('q-kit'),q=S.q.find(x=>x.id==='kit'); if(k&&q){const o=q.o[opts.kit==='partial'?1:0];k.value=T(o[0],o[1]);}}
   ov.hidden=false; document.body.style.overflow='hidden';
   setTimeout(()=>document.getElementById('p-name').focus(),30);
 }
@@ -1096,26 +1125,31 @@ sform.addEventListener('submit',async e=>{
   const ans=[];
   S.q.forEach(q=>{
     let val='';
-    if(q.type==='select'){const x=v(q.id); val=x===''?'':q.o[+x][0];}
-    else if(q.type==='multi'){val=[...f.querySelectorAll(`input[name="${q.id}"]:checked`)].map(i=>q.o[+i.value][0]).join(', ');}
+    if(q.type==='select'){val=v(q.id);}
+    else if(q.type==='multi'){val=[...f.querySelectorAll(`input[name="${q.id}"]:checked`)].map(i=>i.value).join(', ');}
     else val=v(q.id);
     if(q.req&&!val)missing.push(T(q.en,q.ar));
     if(val)ans.push([q.en,val]);
   });
   if(missing.length){err.textContent=T('Please complete: ','يرجى استكمال: ')+missing.join(T(', ','، '));err.hidden=false;return}
   err.hidden=true;
-  const lines=[`Franers inquiry: ${S.en}`,'',`Name: ${v('name')}`,`Mobile: ${v('phone')}`,`Email: ${v('email')}`,`Role: ${ROLES[+v('role')][0]}`,v('company')?`Company / brand: ${v('company')}`:null,v('city')?`City: ${CITY[+v('city')][0]}`:null,'',...ans.map(([q,a])=>`${q}: ${a}`)].filter(x=>x!==null).join('\n');
+  const lines=[`Franers inquiry: ${S.en}`,'',`Name: ${v('name')}`,`Mobile: ${v('phone')}`,`Email: ${v('email')}`,`Role: ${v('role')}`,v('company')?`Company / brand: ${v('company')}`:null,v('city')?`City: ${v('city')}`:null,'',...ans.map(([q,a])=>`${q}: ${a}`)].filter(x=>x!==null).join('\n');
   const subject=`Franers inquiry: ${S.en} – ${v('name')}`;
   document.getElementById('svSum').textContent=lines;
   document.getElementById('svMail').href=`mailto:${TO.join(',')}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines)}`;
   document.getElementById('svWa1').href='https://wa.me/966567111588?text='+encodeURIComponent(lines);
   document.getElementById('svWa2').href='https://wa.me/966555646479?text='+encodeURIComponent(lines);
   const st=document.getElementById('svStatus');
-  st.textContent=T('Press "Send by email" to open your email app with the request addressed to Noureldin Orfali and Mohammad Tabshi, then press Send.','اضغط "أرسل بالبريد الإلكتروني" لفتح تطبيق البريد لديك وقد أُعدّ الطلب موجهاً إلى نورالدين أورفلي ومحمد الطبشي، ثم اضغط إرسال.');
-  if(FORM_ENDPOINT){
-    try{const r=await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({_subject:subject,_cc:'mtabshi@franers.com',_template:'box',_captcha:'false',name:v('name'),email:v('email'),phone:v('phone'),message:lines})});
-      if(r.ok)st.textContent=T('Thank you. Your request has been sent to our team, and we will contact you shortly.','شكراً لك. تم إرسال طلبك إلى فريقنا وسنتواصل معك قريباً.');}catch(x){}
-  }
+  const submit=f.querySelector('[type="submit"]'), payload=new FormData(f);
+  payload.set('form-name',FORM_NAME); payload.set('survey',S.en); payload.set('message',lines);
+  submit.disabled=true; st.textContent=T('Sending your request…','جارٍ إرسال طلبك…');
+  try{
+    const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(payload).toString()});
+    if(!r.ok)throw new Error(`Netlify Forms returned ${r.status}`);
+    st.textContent=T('Thank you. Your request has been sent to our team, and we will contact you shortly.','شكراً لك. تم إرسال طلبك إلى فريقنا وسنتواصل معك قريباً.');
+  }catch(x){
+    st.textContent=T('We could not submit your request automatically. Use email or WhatsApp below to contact us.','تعذّر إرسال طلبك تلقائياً. استخدم البريد الإلكتروني أو واتساب أدناه للتواصل معنا.');
+  }finally{submit.disabled=false;}
   sform.hidden=true; sres.hidden=false; sres.scrollIntoView({block:'nearest'});
 });
 document.getElementById('svCopy').addEventListener('click',e=>copyText(document.getElementById('svSum').textContent,e.currentTarget));
