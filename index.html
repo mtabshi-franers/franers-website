@@ -988,10 +988,15 @@ footer .lg{height:28px}
       <p class="lede"><span class="en">Choose what you need and answer a short survey. Your request goes to Noureldin Orfali and Mohammad Tabshi, and the right consultant replies with a clear next step.</span><span class="ar">اختر ما تحتاجه وأجب عن استبيان قصير. يصل طلبك إلى نورالدين أورفلي ومحمد الطبشي، ويتواصل معك المستشار المناسب بخطوة واضحة.</span></p>
     </div>
     <div class="sv-grid" id="svGrid"></div>
-    <form class="sv-static" id="svStatic" action="https://formsubmit.co/norfali@franers.com" method="POST">
-      <input type="hidden" name="_cc" value="mtabshi@franers.com">
-      <input type="hidden" name="_subject" value="Franers website inquiry">
-      <input type="hidden" name="_template" value="box">
+    <!-- Netlify Forms: this static form registers "franers-survey" at deploy time. Every field the JS survey sends
+         (including the PDF "attachment") must be declared here, or Netlify drops it. -->
+    <form class="sv-static" id="svStatic" name="franers-survey" method="POST" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="franers-survey">
+      <input type="hidden" name="survey" value="General inquiry">
+      <input type="hidden" name="reference">
+      <input type="hidden" name="company">
+      <input type="hidden" name="city">
+      <div hidden><label>Leave this field empty: <input name="bot-field"></label><input type="file" name="attachment" accept="application/pdf"></div>
       <div class="fields">
         <div class="field"><label for="s-name"><span class="en">Full name</span><span class="ar">الاسم الكامل</span> *</label><input id="s-name" name="name" required autocomplete="name"></div>
         <div class="field"><label for="s-phone"><span class="en">Mobile number</span><span class="ar">رقم الجوال</span> *</label><input id="s-phone" name="phone" required inputmode="tel" autocomplete="tel" dir="ltr"></div>
@@ -1368,9 +1373,9 @@ document.getElementById('storyPlay').addEventListener('click',()=>{const box=doc
 fillIcons(); waves(); countUp();
 
 /* ---------- surveys ---------- */
-/* To send submissions automatically from the live site, set FORM_ENDPOINT to a form-to-email service URL
-   (for example a Formspree or FormSubmit endpoint) that forwards to both addresses below. */
-const FORM_ENDPOINT='https://formsubmit.co/ajax/norfali@franers.com';
+/* Submissions go to Netlify Forms ("franers-survey", declared by the static form #svStatic).
+   Email notifications to norfali@ and mtabshi@ are set in Netlify: Project configuration > Notifications > Form submission notifications. */
+const FORM_NAME='franers-survey';
 const TO=['norfali@franers.com','mtabshi@franers.com'];
 const ROLES=[['Owner / founder','مالك / مؤسس'],['Executive / manager','تنفيذي / مدير'],['Investor','مستثمر'],['Franchisee','صاحب امتياز'],['Starting a new concept','رائد أعمال بعلامة تجارية جديدة'],['Other','أخرى']];
 const CITY=[['Riyadh','الرياض'],['Jeddah','جدة'],['Eastern Province','المنطقة الشرقية'],['Makkah / Madinah','مكة المكرمة / المدينة المنورة'],['Other city in KSA','مدينة أخرى في المملكة'],['Another GCC country','دولة خليجية أخرى']];
@@ -1509,22 +1514,18 @@ sform.addEventListener('submit',async e=>{
   lastPdf=pdf?{blob:pdf,name:`Franers-Inquiry-${ref}.pdf`}:null;
   document.getElementById('svPdf').hidden=!pdf;
   let sent=false;
-  if(FORM_ENDPOINT){
-    try{
-      if(pdf){
-        /* FormSubmit only accepts attachments on a standard multipart post, so the PDF goes to the non-AJAX endpoint */
-        const fd=new FormData();
-        fd.append('_subject',`${subject} [${ref}]`); fd.append('_cc','mtabshi@franers.com'); fd.append('_template','table'); fd.append('_captcha','false');
-        fd.append('reference',ref); fd.append('name',v('name')); fd.append('email',v('email')); fd.append('phone',v('phone')); fd.append('message',lines);
-        fd.append('attachment',new File([pdf],lastPdf.name,{type:'application/pdf'}));
-        await fetch(FORM_ENDPOINT.replace('/ajax/','/'),{method:'POST',mode:'no-cors',body:fd}); sent=true;
-      }else{
-        const r=await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({_subject:`${subject} [${ref}]`,_cc:'mtabshi@franers.com',_template:'table',_captcha:'false',reference:ref,name:v('name'),email:v('email'),phone:v('phone'),message:lines})});
-        sent=r.ok;
-      }
-    }catch(x){}
-    if(sent)st.textContent=T(`Thank you. Your request (ref. ${ref}) has been sent to our team, and we will contact you shortly.`,`شكراً لك. تم إرسال طلبك (المرجع ${ref}) إلى فريقنا وسنتواصل معك قريباً.`);
-  }
+  try{
+    /* multipart post to Netlify Forms; the browser sets the Content-Type boundary itself */
+    const fd=new FormData();
+    fd.append('form-name',FORM_NAME); fd.append('bot-field','');
+    fd.append('survey',S.en); fd.append('reference',ref);
+    fd.append('name',v('name')); fd.append('phone',v('phone')); fd.append('email',v('email')); fd.append('role',ROLES[+v('role')][0]);
+    fd.append('company',v('company')); fd.append('city',v('city')?CITY[+v('city')][0]:''); fd.append('service',S.en); fd.append('message',lines);
+    if(pdf)fd.append('attachment',new File([pdf],lastPdf.name,{type:'application/pdf'}));
+    const r=await fetch('/',{method:'POST',body:fd}); sent=r.ok;
+  }catch(x){}
+  st.textContent=sent?T(`Thank you. Your request (ref. ${ref}) has been sent to our team, and we will contact you shortly.`,`شكراً لك. تم إرسال طلبك (المرجع ${ref}) إلى فريقنا وسنتواصل معك قريباً.`)
+    :T('We could not submit your request automatically. Use email or WhatsApp below to contact us.','تعذّر إرسال طلبك تلقائياً. استخدم البريد الإلكتروني أو واتساب أدناه للتواصل معنا.');
   btn.disabled=false; btn.textContent=btnTxt;
   sform.hidden=true; sres.hidden=false; sres.scrollIntoView({block:'nearest'});
 });
