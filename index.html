@@ -439,6 +439,203 @@ footer .lg{height:28px}
 }
 </style>
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>
+/* ===== v2: motion, imagery, icon layouts ===== */
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;transition-delay:calc(var(--i,0) * 70ms)}
+.js .rv.in{opacity:1;transform:none}
+.svg-ic{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;display:block}
+.waves{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.waves svg{position:absolute;width:900px;height:auto;inset-inline-end:-160px;top:-60px;opacity:.22}
+.waves.bl svg{inset-inline-end:auto;inset-inline-start:-220px;top:auto;bottom:-120px}
+
+/* hero on photo */
+.hero{position:relative;overflow:hidden;color:#fff;
+  --ink:#FFFFFF;--text:#E6F4FD;--muted:#B5D6EA;--line:rgba(255,255,255,.2);--chip:transparent;--btn:#22A2EA;--seg:#0B5C86;--seg-ink:#FFFFFF;--ground:#064B6E;
+  background:linear-gradient(100deg,rgba(3,38,57,.96) 0%,rgba(6,75,110,.9) 52%,rgba(6,75,110,.72) 100%),#064B6E url("https://images.unsplash.com/photo-1784637729389-f24e1d2a8b22?auto=format&fit=crop&w=2000&q=70") center/cover no-repeat}
+.hero .wrap{position:relative;z-index:1}
+.hero .eyebrow{color:var(--sky)}
+.hero .btn-ghost{border-color:rgba(255,255,255,.45)}
+.hero .hub{box-shadow:0 0 0 10px rgba(255,255,255,.05)}
+
+/* services */
+.svc-tabs{position:sticky;top:0;z-index:6;background:var(--ground);padding-block:10px;margin-bottom:22px;border-bottom:1px solid var(--line)}
+@media (min-width:1001px){.svc-tabs{top:70px}}
+@media (max-width:820px){.svc-tabs{flex-wrap:nowrap;overflow-x:auto;margin-inline:calc(-1 * clamp(16px,4vw,40px));padding-inline:clamp(16px,4vw,40px)}}
+.svc-tab{transition:background .2s,border-color .2s,color .2s}
+.svc-tab:hover{border-color:var(--sky)}
+.svc-photo{position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:var(--tint)}
+.svc-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s ease}
+.svc-photo:hover img{transform:scale(1.05)}
+.svc-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,75,110,0) 45%,rgba(6,75,110,.75))}
+.svc-photo .big{position:absolute;inset-inline-start:18px;bottom:6px;z-index:1;font-family:var(--display);font-size:84px;line-height:1;color:#fff;opacity:.92}
+.svc-intro .tag-row{display:flex;flex-wrap:wrap;gap:8px}
+.svc-intro .tg{font-size:12px;letter-spacing:.06em;border-radius:999px;padding:4px 11px;background:var(--tint);color:var(--ink);font-weight:500}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;background:var(--soft);border-radius:12px;padding:12px 14px}
+.flow .fl{font-size:13.5px;color:var(--ink);font-weight:500;background:var(--ground);border:1px solid var(--line);border-radius:999px;padding:5px 11px}
+.flow .ar-r{color:var(--sky);display:inline-flex}
+.flow .ar-r svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+[dir="rtl"] .flow .ar-r{transform:scaleX(-1);display:inline-block}
+.panel-h{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sky);font-weight:600;margin:0 0 14px}
+[data-lang="ar"] .panel-h{letter-spacing:0;font-size:14px}
+
+/* journey (connected steps) */
+.jr{list-style:none;margin:0;padding:0;display:grid}
+.jr li{display:grid;grid-template-columns:64px minmax(0,1fr);gap:18px;padding-bottom:26px;position:relative}
+.jr li::before{content:"";position:absolute;inset-inline-start:31px;top:70px;bottom:6px;width:2px;background:linear-gradient(var(--sky),var(--line))}
+.jr li:last-child{padding-bottom:0}
+.jr li:last-child::before{display:none}
+.ic{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:#fff;box-shadow:0 0 0 6px var(--tint);transition:transform .35s ease}
+.jr li:nth-child(even) .ic{background:var(--sky)}
+.jr li:hover .ic,.cyc li:hover .ic{transform:scale(1.08) rotate(-6deg)}
+.jr .tx{display:grid;gap:3px;align-content:start;padding-top:8px;min-width:0}
+.jr .n,.cyc .n,.tl .n{font-family:var(--display);font-size:22px;color:var(--sky);line-height:1}
+.jr b,.cyc b,.tl b,.tile b{font-weight:500;color:var(--ink);font-size:17px;line-height:1.3}
+.jr .tx span:not(.n),.cyc span.d,.tl span.d{font-size:14.5px;color:var(--muted)}
+
+/* icon tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:12px}
+.tile{border-radius:16px;padding:18px;display:grid;gap:10px;align-content:start;background:var(--soft);border:1px solid var(--line);transition:transform .25s ease,border-color .25s,box-shadow .25s}
+.tile:hover{transform:translateY(-4px);border-color:var(--sky);box-shadow:0 14px 28px rgba(6,75,110,.10)}
+.tile .ti2{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:var(--navy);color:#fff}
+.tile:nth-child(3n+2) .ti2{background:var(--sky)}
+.tile b{font-size:15.5px}
+.tile span{font-size:13.5px;color:var(--muted)}
+.tiles.dark .tile{background:var(--navy);border-color:var(--navy)}
+.tiles.dark .tile b{color:#fff}
+.tiles.dark .tile .ti2{background:rgba(255,255,255,.1);color:var(--sky)}
+.tiles.dark .tile:hover{background:#0A5A82}
+.svc-extra{grid-column:1/-1;margin-top:8px;padding-top:28px;border-top:1px solid var(--line)}
+
+/* timeline (consultancy) */
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:12px;position:relative}
+.tl::before{content:"";position:absolute;top:10px;bottom:10px;inset-inline-start:21px;width:2px;background:var(--sky);opacity:.45}
+.tl li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:center}
+.tl .dot{grid-column:1;grid-row:1;width:44px;height:44px;border-radius:50%;background:var(--ground);border:2px solid var(--sky);display:grid;place-items:center;color:var(--navy);position:relative;z-index:1;transition:background .25s,color .25s}
+.tl .dot .svg-ic{width:20px;height:20px}
+.tl li:hover .dot{background:var(--sky);color:#fff}
+.tl .card{grid-column:2;grid-row:1;background:var(--soft);border-radius:14px;padding:12px 16px;display:grid;gap:2px}
+@media (min-width:1100px){
+  .tl::before{inset-inline-start:calc(50% - 1px)}
+  .tl li{grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr)}
+  .tl .dot{grid-column:2}
+  .tl li:nth-child(odd) .card{grid-column:1;text-align:end}
+  .tl li:nth-child(even) .card{grid-column:3}
+}
+
+/* cycle (advisory) */
+.cyc-wrap{position:relative}
+.cyc{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:14px}
+.cyc li{background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:20px;display:grid;gap:8px;align-content:start}
+.cyc .ic{width:52px;height:52px;box-shadow:none}
+.cyc li:nth-child(even) .ic{background:var(--sky)}
+.cyc-hub{display:none}
+@media (min-width:600px){
+  .cyc{grid-template-columns:1fr 1fr;gap:44px}
+  .cyc li:nth-child(3){grid-column:2;grid-row:2}
+  .cyc li:nth-child(4){grid-column:1;grid-row:2}
+  .cyc-hub{display:grid;place-items:center;position:absolute;left:50%;top:50%;width:92px;height:92px;margin:-46px 0 0 -46px;border-radius:50%;background:var(--navy);color:#fff;z-index:2;box-shadow:0 0 0 8px var(--ground)}
+  .cyc-hub::before{content:"";position:absolute;inset:-14px;border-radius:50%;border:2px dashed var(--sky);animation:spin 18s linear infinite}
+  .cyc-hub{place-content:center;gap:3px;text-align:center}
+  .cyc-hub .svg-ic{margin:0 auto}
+  .cyc-hub small{font-size:10px;line-height:1.1;color:#BFE3F8;font-weight:600;letter-spacing:.04em;text-transform:uppercase;max-width:70px}
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* about: story video + history */
+.story{position:relative;border-radius:22px;overflow:hidden;background:var(--navy);aspect-ratio:16/9;margin-bottom:clamp(28px,4vw,48px)}
+.story img,.story video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.story video{background:#000}
+.story-play{position:absolute;inset:0;border:0;padding:0;cursor:pointer;background:none;color:#fff;font:inherit;text-align:start}
+.story-play::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,38,57,.88),rgba(6,75,110,.35))}
+.story-play .in{position:absolute;inset-inline-start:clamp(18px,4vw,48px);bottom:clamp(18px,4vw,44px);z-index:1;display:grid;gap:8px;max-width:520px}
+.story-play .pl{width:72px;height:72px;border-radius:50%;background:var(--sky);display:grid;place-items:center;box-shadow:0 0 0 0 rgba(34,162,234,.55);animation:pulse 2.2s infinite;transition:transform .2s}
+.story-play:hover .pl{transform:scale(1.08)}
+.story-play .pl svg{width:28px;height:28px;fill:#fff;margin-inline-start:4px}
+[dir="rtl"] .story-play .pl svg{transform:scaleX(-1);margin-inline-start:0;margin-inline-end:4px}
+.story-play .st{font-family:var(--display);font-size:clamp(34px,5vw,60px);line-height:.95;text-transform:uppercase}
+[data-lang="ar"] .story-play .st{font-family:var(--ar-title);font-size:clamp(24px,3vw,36px);font-weight:700;line-height:1.3;text-transform:none}
+.story-play .ss{color:#CFE6F5;font-size:15px}
+@keyframes pulse{70%{box-shadow:0 0 0 18px rgba(34,162,234,0)}100%{box-shadow:0 0 0 0 rgba(34,162,234,0)}}
+.history{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:clamp(28px,4vw,48px)}
+.hs{position:relative;border:1px solid var(--line);border-radius:18px;padding:20px 22px;display:grid;gap:4px;background:var(--card);overflow:hidden}
+.hs::after{content:"";position:absolute;inset-inline-end:-30px;bottom:-34px;width:120px;height:126px;background:var(--mark-navy) center/contain no-repeat;opacity:.06}
+.hs b{font-family:var(--display);font-weight:400;font-size:46px;line-height:1;color:var(--sky)}
+.hs h4{font-size:18px;font-weight:500;color:var(--ink);margin:0}
+.hs p{font-size:14px;color:var(--muted)}
+.hs.now{background:var(--navy);border-color:var(--navy)}
+.hs.now h4{color:#fff}.hs.now p{color:var(--band-muted)}
+.hs.now::after{background-image:var(--mark-white);opacity:.1}
+@media (min-width:700px){.history{grid-template-columns:repeat(3,1fr)}}
+
+/* process cards */
+.proc li{background:var(--navy);color:#fff;border-radius:20px;padding:24px;border-top:0;position:relative;overflow:hidden;transition:transform .25s}
+.proc li:hover{transform:translateY(-4px)}
+.proc li::before{position:absolute;inset-inline-end:20px;top:18px;font-size:40px;opacity:.9}
+.proc h3{color:#fff}
+.proc p{color:var(--band-muted)}
+.proc .pic{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);color:var(--sky);margin-bottom:6px}
+.proc .pic .svg-ic{width:28px;height:28px}
+
+/* readiness check */
+.readiness{background:var(--soft);border-block:1px solid var(--line);position:relative;overflow:hidden}
+.rd-grid{display:grid;grid-template-columns:1fr;gap:clamp(24px,5vw,64px);align-items:start;position:relative;z-index:1}
+.rd-points{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
+.rd-points li{display:flex;gap:10px;align-items:center;color:var(--ink);font-weight:500}
+.rd-points .svg-ic{width:22px;height:22px;color:var(--sky)}
+.rd-card{background:var(--ground);border:1px solid var(--line);border-radius:22px;padding:clamp(20px,3vw,32px);box-shadow:0 24px 50px rgba(6,75,110,.10);display:grid;gap:18px}
+.rd-top{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px;color:var(--muted)}
+.rd-bar{height:6px;border-radius:999px;background:var(--tint);overflow:hidden}
+.rd-bar i{display:block;height:100%;background:var(--sky);border-radius:999px;transition:width .4s ease}
+.rd-q{font-size:clamp(20px,2.2vw,24px);font-weight:500;color:var(--ink);line-height:1.3}
+.rd-opts{display:grid;gap:10px}
+.rd-opt{display:flex;align-items:center;gap:12px;text-align:start;border:1px solid var(--line);background:var(--ground);border-radius:14px;padding:14px 16px;font:400 15.5px var(--body);color:var(--ink);cursor:pointer;min-height:52px;transition:border-color .2s,background .2s,transform .15s}
+[data-lang="ar"] .rd-opt,[data-lang="ar"] .rd-back{font-family:var(--ar-body)}
+.rd-opt::before{content:"";flex:0 0 18px;height:18px;border-radius:50%;border:2px solid var(--line);transition:border .2s,background .2s}
+.rd-opt:hover{border-color:var(--sky);background:var(--soft)}
+.rd-opt[aria-pressed="true"]{border-color:var(--sky);background:var(--tint)}
+.rd-opt[aria-pressed="true"]::before{border:5px solid var(--sky)}
+.rd-back{background:none;border:0;color:var(--muted);font:500 14px var(--body);cursor:pointer;padding:6px 0;justify-self:start}
+.rd-back:hover{color:var(--ink)}
+.rd-res{display:grid;gap:16px}
+.rd-score{display:flex;align-items:center;gap:18px}
+.rd-ring{width:112px;height:112px;flex-shrink:0;position:relative}
+.rd-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.rd-ring circle{fill:none;stroke-width:10}
+.rd-ring .bg{stroke:var(--tint)}
+.rd-ring .fg{stroke:var(--sky);stroke-linecap:round;transition:stroke-dashoffset 1.2s ease}
+.rd-ring b{position:absolute;inset:0;display:grid;place-content:center;text-align:center;font-family:var(--display);font-weight:400;font-size:34px;color:var(--ink);line-height:1}
+.rd-ring b small{font-family:var(--body);font-size:12px;color:var(--muted)}
+.rd-tier{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);font-weight:600}
+[data-lang="ar"] .rd-tier{letter-spacing:0;font-size:14px}
+.rd-res h3{font-size:24px;font-weight:500;color:var(--ink);line-height:1.25}
+.rd-res p{color:var(--muted)}
+.rd-gaps{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rd-gaps li{background:var(--soft);border-radius:12px;padding:10px 14px;font-size:14px;color:var(--text);display:grid;gap:2px}
+.rd-gaps b{font-weight:500;color:var(--ink)}
+.rd-actions{display:flex;flex-wrap:wrap;gap:10px}
+.rd-note{font-size:12.5px;color:var(--muted)}
+
+/* client logo wall */
+.marquee{direction:ltr;display:grid;gap:14px;margin-inline:calc(-1 * clamp(16px,4vw,40px));-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);overflow:hidden}
+.mq-track{display:flex;gap:14px;width:max-content;animation:mq 70s linear infinite}
+.mq-track.rev{animation-direction:reverse;animation-duration:80s}
+.marquee:hover .mq-track,.marquee:focus-within .mq-track{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){.mq-track{flex-wrap:wrap;width:auto;justify-content:center}.mq-track .dup{display:none}}
+.lt{position:relative;margin:0;width:150px;height:96px;flex:0 0 auto;border:1px solid var(--line);border-radius:16px;background:#fff;display:grid;place-items:center;overflow:hidden;cursor:default;transition:transform .25s,border-color .25s,box-shadow .25s;outline:none}
+.lt img{max-width:78%;max-height:70%;object-fit:contain;filter:grayscale(1);opacity:.7;mix-blend-mode:multiply;transition:filter .3s,opacity .3s,transform .3s}
+.lt figcaption{position:absolute;inset-inline:0;bottom:0;background:var(--navy);color:#fff;font-size:12.5px;font-weight:500;text-align:center;padding:6px 6px;transform:translateY(100%);transition:transform .25s ease;direction:ltr}
+.lt:hover,.lt:focus-visible,.lt.on{transform:translateY(-3px);border-color:var(--sky);box-shadow:0 10px 22px rgba(6,75,110,.12)}
+.lt:hover img,.lt:focus-visible img,.lt.on img{filter:none;opacity:1;transform:translateY(-8px)}
+.lt:hover figcaption,.lt:focus-visible figcaption,.lt.on figcaption{transform:none}
+.lt.nn:hover img,.lt.nn.on img{transform:none}
+.logo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin-top:22px}
+.logo-grid .lt{width:auto}
+.wall-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-top:24px}
+.wall-foot p{color:var(--muted);font-size:14px}
+
+@media (min-width:821px){.rd-grid{grid-template-columns:.85fr 1.15fr}}
+</style>
 </head>
 <body>
 
@@ -468,6 +665,7 @@ footer .lg{height:28px}
   <nav class="mnav" id="mnav" aria-label="Mobile" hidden>
     <a href="#about"><span class="en">About us</span><span class="ar">من نحن</span></a>
     <a href="#services"><span class="en">Services</span><span class="ar">خدماتنا</span></a>
+    <a href="#readiness"><span class="en">Franchise readiness check</span><span class="ar">اختبار جاهزية الامتياز</span></a>
     <a href="#packages"><span class="en">Franchise kits</span><span class="ar">حزم الامتياز</span></a>
     <a href="#academy"><span class="en">Academy</span><span class="ar">الأكاديمية</span></a>
     <a href="#clients"><span class="en">Clients</span><span class="ar">عملاؤنا</span></a>
@@ -479,6 +677,7 @@ footer .lg{height:28px}
 
 <main id="top">
 <section class="hero">
+  <div class="waves" aria-hidden="true"></div>
   <div class="wrap hero-grid">
     <div class="hero-text">
       <p class="eyebrow"><span class="en">Business growth consultancy · Jeddah &amp; Riyadh</span><span class="ar">استشارات نمو الأعمال · جدة والرياض</span></p>
@@ -490,9 +689,9 @@ footer .lg{height:28px}
         <a class="btn btn-ghost" href="#services"><span class="en">Explore services</span><span class="ar">تعرّف على خدماتنا</span></a>
       </div>
       <div class="facts">
-        <div class="fact"><strong>14+</strong><span class="en">Years of experience</span><span class="ar">عاماً من الخبرة</span></div>
-        <div class="fact"><strong>140+</strong><span class="en">Brands served</span><span class="ar">علامة تجارية خدمناها</span></div>
-                <div class="fact"><strong>10</strong><span class="en">Service lines</span><span class="ar">خدمات متخصصة</span></div>
+        <div class="fact"><strong data-n="14" data-s="+">14+</strong><span class="en">Years of experience</span><span class="ar">عاماً من الخبرة</span></div>
+        <div class="fact"><strong data-n="140" data-s="+">140+</strong><span class="en">Brands served</span><span class="ar">علامة تجارية خدمناها</span></div>
+        <div class="fact"><strong data-n="10" data-s="">10</strong><span class="en">Service lines</span><span class="ar">خدمات متخصصة</span></div>
       </div>
     </div>
     <div class="wheel-card">
@@ -525,6 +724,21 @@ footer .lg{height:28px}
         <p class="mission-t display"><span class="en">To create <span class="amp">&amp; upgrade</span></span><span class="ar">نبتكر <span class="amp">ونطوّر</span></span></p>
         <p><span class="en">Our mission turns around three pillars: franchising qualified brands, creating new brands, and consulting and improving existing businesses.</span><span class="ar">تدور مهمتنا حول ثلاث ركائز: منح امتياز العلامات المؤهلة، وابتكار علامات تجارية جديدة، وتقديم الاستشارات وتطوير الأعمال القائمة.</span></p>
       </aside>
+    </div>
+    <div class="story rv" id="story">
+      <img src="https://images.unsplash.com/photo-1779442563698-11fad08a733e?auto=format&fit=crop&w=1800&q=70" alt="" loading="lazy">
+      <button class="story-play" id="storyPlay" type="button" aria-label="Play the Franers story video">
+        <span class="in">
+          <span class="pl"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span>
+          <span class="st"><span class="en">Watch our story</span><span class="ar">شاهد قصتنا</span></span>
+          <span class="ss"><span class="en">How Franers creates and upgrades F&amp;B brands across Saudi Arabia and the GCC.</span><span class="ar">كيف تبتكر فرانرز علامات الأغذية والمشروبات وتطوّرها في المملكة ودول الخليج.</span></span>
+        </span>
+      </button>
+    </div>
+    <div class="history">
+      <div class="hs rv" style="--i:0"><b>2008</b><h4>FranPioneers</h4><p><span class="en">Where it started: franchise and F&amp;B development under the FranPioneers name.</span><span class="ar">البداية: تطوير الامتياز التجاري وقطاع الأغذية والمشروبات تحت اسم فران بايونيرز.</span></p></div>
+      <div class="hs rv" style="--i:1"><b>2016</b><h4>FranPioneers</h4><p><span class="en">A refreshed identity and a growing portfolio of brands across the region.</span><span class="ar">هوية متجددة ومحفظة متنامية من العلامات التجارية في المنطقة.</span></p></div>
+      <div class="hs now rv" style="--i:2"><b>2020</b><h4>Franers</h4><p><span class="en">Franers today: create, upgrade and franchise, from Jeddah and Riyadh.</span><span class="ar">فرانرز اليوم: نبتكر ونطوّر ونمنح الامتياز، من جدة والرياض.</span></p></div>
     </div>
     <div class="pillars">
       <div class="pillar">
@@ -604,7 +818,24 @@ footer .lg{height:28px}
   </div>
 </section>
 
-<section id="packages" style="padding-top:0">
+<section class="readiness" id="readiness">
+  <div class="waves bl" aria-hidden="true"></div>
+  <div class="wrap rd-grid">
+    <div class="sec-head" style="margin:0">
+      <p class="eyebrow"><span class="en">Free franchise readiness check</span><span class="ar">اختبار مجاني لجاهزية الامتياز</span></p>
+      <h2 class="display"><span class="en">Is your brand ready to franchise?</span><span class="ar">هل علامتك التجارية جاهزة للامتياز؟</span></h2>
+      <p class="lede"><span class="en">Franchisees buy a proven, repeatable system. Answer six quick questions to see how close your brand is, which gaps to close first, and which franchise kit fits.</span><span class="ar">يشتري صاحب الامتياز منظومة ناجحة وقابلة للتكرار. أجب عن ستة أسئلة سريعة لتعرف مدى جاهزية علامتك، والفجوات التي تحتاج إلى معالجتها أولاً، وحزمة الامتياز المناسبة لك.</span></p>
+      <ul class="rd-points">
+        <li><span data-ic="clock"></span><span><span class="en">Takes about 2 minutes</span><span class="ar">يستغرق دقيقتين تقريباً</span></span></li>
+        <li><span data-ic="gauge"></span><span><span class="en">Instant score and recommendation</span><span class="ar">نتيجة وتوصية فورية</span></span></li>
+        <li><span data-ic="lock"></span><span><span class="en">No sign-up needed</span><span class="ar">دون الحاجة إلى تسجيل</span></span></li>
+      </ul>
+    </div>
+    <div class="rd-card" id="rdCard" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="packages">
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow"><span class="en">Franchise kits</span><span class="ar">حزم الامتياز</span></p>
@@ -686,10 +917,10 @@ footer .lg{height:28px}
       <h2 class="display"><span class="en">The process</span><span class="ar">منهجية العمل</span></h2>
     </div>
     <ol class="proc">
-      <li><h3><span class="en">Research</span><span class="ar">البحث</span></h3><p><span class="en">We keep researching best practice across every F&amp;B category, including operations tools, modern equipment, franchise regulation updates and market trends.</span><span class="ar">نبحث باستمرار في أفضل الممارسات بجميع فئات القطاع، بما في ذلك أدوات تحسين العمليات والمعدات الحديثة وتحديثات لوائح الامتياز والاتجاهات العامة.</span></p></li>
-      <li><h3><span class="en">Design</span><span class="ar">التصميم</span></h3><p><span class="en">Whether it is franchise manuals or a new concept, we design a customized pathway for a smooth workflow, with you involved at every step.</span><span class="ar">سواء تعلق الأمر بأدلة الامتياز أو ابتكار علامة تجارية جديدة، نصمم مساراً مخصصاً لسير عمل سلس، بمشاركتك في كل خطوة.</span></p></li>
-      <li><h3><span class="en">Development</span><span class="ar">التطوير</span></h3><p><span class="en">Upon approval, we develop the project: site visits, continuous recommendations, manual drafts, revisions and follow-ups.</span><span class="ar">بعد الموافقة نطوّر المشروع: زيارات ميدانية وتوصيات مستمرة ومسودات الأدلة والمراجعات والمتابعة.</span></p></li>
-      <li><h3><span class="en">Handover</span><span class="ar">التسليم</span></h3><p><span class="en">The project is handed over once every part of the scope is completed, revised and approved by you.</span><span class="ar">يُسلَّم المشروع بعد استكمال جميع جوانب نطاق العمل ومراجعتها واعتمادها من قبلك.</span></p></li>
+      <li class="rv" style="--i:0"><span class="pic" data-ic="research"></span><h3><span class="en">Research</span><span class="ar">البحث</span></h3><p><span class="en">We keep researching best practice across every F&amp;B category, including operations tools, modern equipment, franchise regulation updates and market trends.</span><span class="ar">نبحث باستمرار في أفضل الممارسات بجميع فئات القطاع، بما في ذلك أدوات تحسين العمليات والمعدات الحديثة وتحديثات لوائح الامتياز والاتجاهات العامة.</span></p></li>
+      <li class="rv" style="--i:1"><span class="pic" data-ic="pencilRuler"></span><h3><span class="en">Design</span><span class="ar">التصميم</span></h3><p><span class="en">Whether it is franchise manuals or a new concept, we design a customized pathway for a smooth workflow, with you involved at every step.</span><span class="ar">سواء تعلق الأمر بأدلة الامتياز أو ابتكار علامة تجارية جديدة، نصمم مساراً مخصصاً لسير عمل سلس، بمشاركتك في كل خطوة.</span></p></li>
+      <li class="rv" style="--i:2"><span class="pic" data-ic="gears"></span><h3><span class="en">Development</span><span class="ar">التطوير</span></h3><p><span class="en">Upon approval, we develop the project: site visits, continuous recommendations, manual drafts, revisions and follow-ups.</span><span class="ar">بعد الموافقة نطوّر المشروع: زيارات ميدانية وتوصيات مستمرة ومسودات الأدلة والمراجعات والمتابعة.</span></p></li>
+      <li class="rv" style="--i:3"><span class="pic" data-ic="key"></span><h3><span class="en">Handover</span><span class="ar">التسليم</span></h3><p><span class="en">The project is handed over once every part of the scope is completed, revised and approved by you.</span><span class="ar">يُسلَّم المشروع بعد استكمال جميع جوانب نطاق العمل ومراجعتها واعتمادها من قبلك.</span></p></li>
     </ol>
   </div>
 </section>
@@ -700,7 +931,11 @@ footer .lg{height:28px}
       <p class="eyebrow"><span class="en">Selected clients</span><span class="ar">من عملائنا</span></p>
       <h2 class="display"><span class="en">Brands we proudly worked with</span><span class="ar">علامات تجارية نفخر بالعمل معها</span></h2>
     </div>
-    <div class="wall" id="wall"></div>
+    <div class="marquee rv" id="marquee" aria-label="Client logos"></div>
+    <div class="wall-foot" style="justify-content:flex-end">
+      <button class="btn btn-ghost" id="allBtn" type="button" aria-expanded="false" aria-controls="logoGrid"></button>
+    </div>
+    <div class="logo-grid" id="logoGrid" hidden></div>
     <div class="partners">
       <div class="partner"><h4>King-Casey</h4><p><span class="en">Brand and retail innovation.</span><span class="ar">ابتكار العلامات التجارية وتجارب البيع.</span></p></div>
       <div class="partner"><h4>Foodesco</h4><p><span class="en">Food service and commercial kitchen design, planning and project management.</span><span class="ar">تخطيط وتصميم المطابخ التجارية ومرافق خدمات الطعام وإدارة مشاريعها.</span></p></div>
@@ -726,7 +961,7 @@ footer .lg{height:28px}
       <div class="tcard">
         <h3><span class="en">Noureldin Orfali</span><span class="ar">نورالدين أورفلي</span></h3>
         <p class="role"><span class="en">Managing Partner</span><span class="ar">الشريك الإداري</span></p>
-        <p class="mail">norfali@franers.com<span dir="ltr">+966 567 111 588</span></p>
+        <p class="mail">norfali@franers.com</p>
         <p class="bio-t"><span class="en">17+ Years in F&amp;B Leadership</span><span class="ar">أكثر من 17 عاماً في قيادة قطاع الأغذية والمشروبات</span></p>
         <p><span class="en">A growth-driven leader who has spent his career turning F&amp;B concepts into thriving, profitable businesses. Noureldin leads Franers’ business development and new service lines, bringing hands-on expertise in concept creation, cost and efficiency optimization, and scaling brands across Saudi Arabia and the GCC.</span><span class="ar">قائد يركّز على النمو، أمضى مسيرته في تحويل العلامات التجارية في قطاع الأغذية والمشروبات إلى أعمال ناجحة ومربحة. يقود نورالدين تطوير الأعمال وخطوط الخدمات الجديدة في فرانرز، مستنداً إلى خبرة عملية في ابتكار العلامات التجارية، وتحسين التكاليف ورفع الكفاءة، وتوسيع العلامات التجارية في المملكة ودول الخليج.</span></p>
       </div>
@@ -753,9 +988,10 @@ footer .lg{height:28px}
       <p class="lede"><span class="en">Choose what you need and answer a short survey. Your request goes to Noureldin Orfali and Mohammad Tabshi, and the right consultant replies with a clear next step.</span><span class="ar">اختر ما تحتاجه وأجب عن استبيان قصير. يصل طلبك إلى نورالدين أورفلي ومحمد الطبشي، ويتواصل معك المستشار المناسب بخطوة واضحة.</span></p>
     </div>
     <div class="sv-grid" id="svGrid"></div>
-    <form class="sv-static" id="svStatic" name="franers-survey" method="POST" data-netlify="true" netlify netlify-honeypot="bot-field">
-      <div hidden><label>Leave this field empty: <input name="bot-field"></label></div>
-      <input type="hidden" name="survey" value="General inquiry">
+    <form class="sv-static" id="svStatic" action="https://formsubmit.co/norfali@franers.com" method="POST">
+      <input type="hidden" name="_cc" value="mtabshi@franers.com">
+      <input type="hidden" name="_subject" value="Franers website inquiry">
+      <input type="hidden" name="_template" value="box">
       <div class="fields">
         <div class="field"><label for="s-name"><span class="en">Full name</span><span class="ar">الاسم الكامل</span> *</label><input id="s-name" name="name" required autocomplete="name"></div>
         <div class="field"><label for="s-phone"><span class="en">Mobile number</span><span class="ar">رقم الجوال</span> *</label><input id="s-phone" name="phone" required inputmode="tel" autocomplete="tel" dir="ltr"></div>
@@ -764,12 +1000,6 @@ footer .lg{height:28px}
         <div class="field full"><label for="s-svc"><span class="en">Service needed</span><span class="ar">الخدمة المطلوبة</span> *</label><select id="s-svc" name="service" required><option value="">Select / اختر</option><option>New brand creation – إنشاء علامة تجارية جديدة</option><option>Franchise development (Full / Partial Kit) – تطوير الامتياز</option><option>Buy a franchise – امتلاك امتياز</option><option>F&amp;B consultancy – استشارات الأغذية والمشروبات</option><option>Profitability Booster – معزّز الربحية</option><option>Executive advisory – الاستشارات التنفيذية</option><option>Concept survey &amp; solutions – تقييم العلامة التجارية والحلول</option><option>Franers Academy – أكاديمية فرانرز</option><option>Other – أخرى</option></select></div>
         <div class="field full"><label for="s-msg"><span class="en">Tell us about your project</span><span class="ar">حدّثنا عن مشروعك</span></label><textarea id="s-msg" name="message" rows="4"></textarea></div>
       </div>
-      <input type="hidden" name="company">
-      <input type="hidden" name="city">
-      <input type="hidden" name="need">
-      <input type="hidden" name="seg">
-      <input type="hidden" name="br">
-      <input type="hidden" name="msg">
       <button class="btn btn-primary" type="submit"><span class="en">Send request</span><span class="ar">أرسل الطلب</span></button>
     </form>
   </div>
@@ -796,9 +1026,6 @@ footer .lg{height:28px}
       <h3><span class="en">Reach us</span><span class="ar">تواصل معنا</span></h3>
       <div class="ct-line"><strong dir="ltr">+966 555 6464 79</strong><button class="copy" type="button" data-copy="+966555646479"><span class="en">Copy</span><span class="ar">نسخ</span></button></div>
       <div class="ct-line"><strong>info@franers.com</strong><button class="copy" type="button" data-copy="info@franers.com"><span class="en">Copy</span><span class="ar">نسخ</span></button></div>
-      <h3 style="margin-top:18px"><span class="en">Noureldin Orfali · Managing Partner</span><span class="ar">نورالدين أورفلي · الشريك الإداري</span></h3>
-      <div class="ct-line"><strong dir="ltr">+966 567 111 588</strong><button class="copy" type="button" data-copy="+966567111588"><span class="en">Copy</span><span class="ar">نسخ</span></button></div>
-      <div class="ct-line"><strong>norfali@franers.com</strong><button class="copy" type="button" data-copy="norfali@franers.com"><span class="en">Copy</span><span class="ar">نسخ</span></button></div>
       <p style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px"><a class="wa-inline" href="https://wa.me/966567111588" target="_blank" rel="noopener"><span class="en">WhatsApp Noureldin Orfali</span><span class="ar">واتساب نورالدين أورفلي</span></a>
       <a class="wa-inline" href="https://wa.me/966555646479" target="_blank" rel="noopener"><span class="en">WhatsApp Mohammad Tabshi</span><span class="ar">واتساب محمد الطبشي</span></a></p>
     </div>
@@ -825,13 +1052,14 @@ footer .lg{height:28px}
 <div class="sv-overlay" id="svOverlay" hidden>
   <div class="sv-box" role="dialog" aria-modal="true" aria-labelledby="svTitle">
     <div class="sv-head"><div><p class="eyebrow" style="color:var(--sky)"><span class="en">Franers survey</span><span class="ar">استبيان فرانرز</span></p><h3 class="display" id="svTitle"></h3></div><button class="sv-close" id="svClose" type="button" aria-label="Close">×</button></div>
-    <form id="svForm" name="franers-survey" method="POST" novalidate style="border:0;padding:0;background:none"></form>
+    <form id="svForm" novalidate style="border:0;padding:0;background:none"></form>
     <div class="summary" id="svResult" hidden>
       <p id="svStatus" style="color:var(--ink);font-weight:500"></p>
       <pre id="svSum"></pre>
       <div class="row">
         <a class="btn btn-primary" id="svMail" href="#"><span class="en">Send by email</span><span class="ar">أرسل بالبريد الإلكتروني</span></a>
         <button class="btn btn-ghost" type="button" id="svCopy"><span class="en">Copy text</span><span class="ar">نسخ النص</span></button>
+        <button class="btn btn-ghost" type="button" id="svPdf" hidden><span class="en">Download PDF copy</span><span class="ar">تنزيل نسخة PDF</span></button>
       </div>
       <p class="note"><span class="en">Or send it on WhatsApp:</span><span class="ar">أو أرسله عبر واتساب:</span></p>
       <div class="row">
@@ -962,31 +1190,187 @@ const services=[
   who:{en:'Process: concept survey → select solutions → install the system and train the team on site → follow-up audit after 60–90 days',ar:'المنهجية: تقييم العلامة التجارية ← اختيار الحلول ← تطبيق النظام وتدريب الفريق ميدانياً ← تدقيق المتابعة بعد 60–90 يوماً'}, cta:{en:'Request a concept survey',ar:'اطلب تقييم العلامة التجارية'},
   items:[['Increasing sales and profits','زيادة المبيعات والأرباح','',''],['Quality control system','نظام ضبط الجودة','',''],['Maintenance system','نظام الصيانة','Corrective and preventive','التصحيحية والوقائية'],['Operations control','الرقابة التشغيلية','',''],['5S workplace strategy','منهجية 5S لتنظيم بيئة العمل','','']]}
 ];
+/* ---------- icons (line style, matching the company profile) ---------- */
+const IC={
+ bulb:'M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z',
+ plan:'M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8zM14 3v5h5M9 17v-3M12 17v-6M15 17v-2',
+ star:'M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z',
+ sofa:'M5 11V8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3M3 13a2 2 0 0 1 4 0v2h10v-2a2 2 0 0 1 4 0v4H3zM5 17v2M19 17v2',
+ menu:'M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M18 3c-2 2-3 5-3 8h3v10',
+ team:'M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM2 21v-1a6 6 0 0 1 12 0v1M16 3.5a4 4 0 0 1 0 7M22 21v-1a6 6 0 0 0-4-5.6',
+ book:'M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 21a2 2 0 0 1 2-2h13v2M9 7h6M9 11h4',
+ scissors:'M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM8.1 7.9L20 20M8.1 16.1L20 4',
+ gears:'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z',
+ clipboard:'M9 4H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2M9 4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2zM9 14l2 2 4-4',
+ award:'M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM8.2 13.9L7 22l5-3 5 3-1.2-8.1',
+ doc:'M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8zM14 3v5h5M9 13h6M9 17h6M9 9h1',
+ key:'M21 2l-2 2m-7.6 7.6a5.5 5.5 0 1 1-7.8 7.8 5.5 5.5 0 0 1 7.8-7.8zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4',
+ target:'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2z',
+ check:'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM8 12l3 3 5-6',
+ research:'M10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM21 21l-6-6M5.5 10h2l1.2-2.5 2 5 1.3-2.5h2.5',
+ scale:'M12 3v18M8 21h8M4 7h16M7 7l-3 7h6zM17 7l-3 7h6z',
+ market:'M3 21h18M6 21V11M10 21V7M14 21v-8M18 21V4',
+ hierarchy:'M12 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM5 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM19 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM12 8v4M5 16v-4h14v4',
+ pos:'M4 12h16v8H4zM6 12V5h12v7M9 8h6M7 16h2M11 16h2M15 16h2',
+ sop:'M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2',
+ hr:'M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM3 21v-1a6 6 0 0 1 12 0v1M19 8v6M16 11h6',
+ eye:'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z',
+ search:'M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM21 21l-5-5',
+ route:'M6 21a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM18 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM6 17V9a4 4 0 0 1 4-4h6M18 7v8a4 4 0 0 1-4 4H8',
+ receipt:'M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2zM9 8h6M9 12h6M9 16h3',
+ trend:'M3 17l6-6 4 4 8-8M15 7h6v6',
+ shield:'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM9 12l2 2 4-4',
+ wrench:'M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z',
+ sliders:'M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1M15 4v4M9 10v4M17 16v4',
+ grid:'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z',
+ chat:'M4 5h12v9H8l-4 3zM16 9h4v9l-3-2h-7v-2',
+ loop:'M20 11a8 8 0 0 0-14.9-4M4 4v4h4M4 13a8 8 0 0 0 14.9 4M20 20v-4h-4',
+ gauge:'M3.5 16a9 9 0 1 1 17 0M12 13l4-5M12 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z',
+ pencilRuler:'M4 20l4-1L19 8l-3-3L5 16zM14 7l3 3M15 15l4 4 2-2-4-4M3 7l4-4 3 3',
+ handshake:'M3 11l4-4 4 3 3-3 7 5M3 11v5l4 3M21 12v4l-6 4-4-3M11 10l3 3',
+ megaphone:'M3 10v4h4l6 4V6L7 10zM17 9a4 4 0 0 1 0 6M19.5 6.5a8 8 0 0 1 0 11',
+ pie:'M12 3v9h9A9 9 0 1 1 12 3zM15 3.5A9 9 0 0 1 20.5 9H15z',
+ briefcase:'M4 8h16v11H4zM9 8V5h6v3M4 13h16',
+ pin:'M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11zM12 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z',
+ clock:'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2',
+ lock:'M6 11h12v10H6zM8 11V7a4 4 0 0 1 8 0v4'
+};
+const icon=k=>`<svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="${IC[k]||IC.check}"/></svg>`;
+function fillIcons(root){(root||document).querySelectorAll('[data-ic]').forEach(e=>{if(!e.firstChild)e.innerHTML=icon(e.dataset.ic)})}
+
+/* ---------- services: layout, icons and photo per service ---------- */
+const UNS=id=>`https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1200&q=70`;
+const SVX={
+ concept:{lay:'tiles',img:'1776614277456-0fcbc6712eb6',ic:['bulb','plan','star','sofa','menu','team','book','scissors'],tg:[['12 start-up stages','12 مرحلة تأسيس'],['From idea to opening','من الفكرة حتى الافتتاح']],
+   head:['What we deliver','ما نقدّمه']},
+ franchise:{lay:'journey',img:'1739285452618-0b7b3d04f953',ic:['clipboard','award','doc','key'],tg:[['Full or Partial Kit','حزمة كاملة أو جزئية'],['Saudi regulations','متوافق مع الأنظمة السعودية']],
+   head:['How it works','كيف نعمل'],
+   extra:{h:['Inside the Full Franchise Kit','محتويات حزمة الامتياز الكاملة'],tiles:[
+    ['chat','Concept survey','تقييم العلامة التجارية'],['clipboard','All brand aspects questionnaire','استبيان جميع جوانب العلامة'],['briefcase','Legal agreements & franchise structure','الاتفاقيات القانونية وهيكل الامتياز'],['scale','MOU & due diligence','مذكرة التفاهم والفحص النافي للجهالة'],['book','Franchise profile & franchisor manual','ملف الامتياز ودليل مانح الامتياز'],['pin','Site selection manual','دليل اختيار الموقع'],['gears','Operations manual','دليل التشغيل'],['market','Administration manual','الدليل الإداري'],['megaphone','Marketing manual','دليل التسويق'],['pie','Finance manual','دليل المالية'],['team','Human resources manual','دليل الموارد البشرية']]}},
+ invest:{lay:'journey',img:'1758599543129-5269a8f29e68',ic:['target','check','research','scale'],tg:[['For investors','للمستثمرين'],['4 steps','4 خطوات']],head:['Your path to a franchise','طريقك إلى امتلاك امتياز']},
+ consult:{lay:'timeline',img:'1760169799369-2b8574466735',ic:['market','hierarchy','menu','pos','sop','clipboard','hr','eye'],tg:[['One-shot or 12-month SLA','مشروع واحد أو عقد سنوي']],head:['Scope of work','نطاق العمل'],flow:true},
+ cost:{lay:'journey',img:'1763038311036-6d18805537e5',ic:['search','doc','route','receipt'],tg:[['Prime cost & margin','التكلفة الأولية والهامش'],['System + store audit','تدقيق الأنظمة والفروع']],head:['How the audit runs','مراحل التدقيق']},
+ advisory:{lay:'cycle',img:'1758518730384-be3d205838e8',ic:['target','pencilRuler','handshake','gauge'],tg:[['Senior level','مستوى تنفيذي'],['KPI-linked option','خيار مرتبط بالأداء']],head:['The advisory cycle','دورة الاستشارات']},
+ survey:{lay:'tiles',img:'1677435783428-c30b135eb021',ic:['trend','shield','wrench','sliders','grid'],tg:[['Ready-to-install solutions','حلول جاهزة للتطبيق']],head:['Focused solutions','الحلول المركّزة'],flow:true}
+};
 const tabs=document.getElementById('svcTabs'),panels=document.getElementById('svcPanels');
 let curSvc='concept';
+try{const m=location.hash.match(/^#service-(\w+)$/); if(m&&services.some(s=>s.id===m[1]))curSvc=m[1];}catch(e){}
+function revealIn(root){const els=root.querySelectorAll('.rv');void root.offsetWidth;setTimeout(()=>els.forEach(e=>e.classList.add('in')),30)}
 function renderServices(){
   tabs.innerHTML='';panels.innerHTML='';
   services.forEach((s,idx)=>{
+    const x=SVX[s.id], num=String(idx+1).padStart(2,'0'), A=lang==='ar';
     const b=document.createElement('button'); b.type='button'; b.className='svc-tab'; b.setAttribute('role','tab'); b.id='tab-'+s.id;
     b.setAttribute('aria-selected',s.id===curSvc); b.setAttribute('aria-controls','panel-'+s.id);
-    const no=document.createElement('span'); no.className='no'; no.textContent=String(idx+1).padStart(2,'0'); b.append(no, document.createTextNode(L(s)));
-    b.onclick=()=>{curSvc=s.id;renderServices()};
+    const no=document.createElement('span'); no.className='no'; no.textContent=num; b.append(no, document.createTextNode(L(s)));
+    b.onclick=()=>selectService(s.id,true);
     tabs.appendChild(b);
     const p=document.createElement('div'); p.className='svc-panel'; p.id='panel-'+s.id; p.setAttribute('role','tabpanel'); p.setAttribute('aria-labelledby','tab-'+s.id); p.hidden=s.id!==curSvc;
-    const li=x=>{const t=lang==='ar'?x[1]:x[0], d=lang==='ar'?x[3]:x[2]; return `<li><b>${t}</b>${d?`<span>${d}</span>`:''}</li>`};
-    const body=s.items?`<ul class="deliv">${s.items.map(li).join('')}</ul>`:`<ol class="steps">${s.steps.map(li).join('')}</ol>`;
-    p.innerHTML=`<div class="svc-intro"><p class="eyebrow" style="color:var(--sky)">${lang==='ar'?'الخدمة':'Service'} ${String(services.indexOf(s)+1).padStart(2,'0')}</p><h3 class="display">${L(s.h)}</h3><p>${L(s.p)}</p><p class="who">${L(s.who)}</p><a class="btn btn-primary" href="#start" data-survey="${s.id}" style="justify-self:start">${L(s.cta)}</a></div><div>${body}</div>`;
+    const rows=s.items||s.steps, T2=r=>A?r[1]:r[0], D2=r=>A?r[3]:r[2];
+    let body='';
+    if(x.lay==='journey') body=`<ol class="jr">${rows.map((r,i)=>`<li class="rv" style="--i:${i}"><span class="ic">${icon(x.ic[i])}</span><div class="tx"><span class="n">${String(i+1).padStart(2,'0')}</span><b>${T2(r)}</b>${D2(r)?`<span>${D2(r)}</span>`:''}</div></li>`).join('')}</ol>`;
+    else if(x.lay==='tiles') body=`<div class="tiles">${rows.map((r,i)=>`<div class="tile rv" style="--i:${i}"><span class="ti2">${icon(x.ic[i])}</span><b>${T2(r)}</b>${D2(r)?`<span>${D2(r)}</span>`:''}</div>`).join('')}</div>`;
+    else if(x.lay==='timeline') body=`<ol class="tl">${rows.map((r,i)=>`<li class="rv" style="--i:${i}"><span class="dot">${icon(x.ic[i])}</span><div class="card"><b>${T2(r)}</b>${D2(r)?`<span class="d">${D2(r)}</span>`:''}</div></li>`).join('')}</ol>`;
+    else body=`<div class="cyc-wrap"><ol class="cyc">${rows.map((r,i)=>`<li class="rv" style="--i:${i}"><span class="ic">${icon(x.ic[i])}</span><span class="n">${String(i+1).padStart(2,'0')}</span><b>${T2(r)}</b><span class="d">${D2(r)}</span></li>`).join('')}</ol><div class="cyc-hub" aria-hidden="true">${icon('loop')}<small>${A?'دورة شهرية':'Monthly cycle'}</small></div></div>`;
+    let who=`<p class="who">${L(s.who)}</p>`;
+    if(x.flow){const raw=L(s.who).replace(/^[^:]+:\s*/,''), parts=raw.split(/\s*[→←]\s*/);
+      who=`<div class="flow" aria-label="${A?'المنهجية':'Process'}">${parts.map((t,i)=>`${i?'<span class="ar-r" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>':''}<span class="fl">${t}</span>`).join('')}</div>`;}
+    const extra=x.extra?`<div class="svc-extra"><p class="panel-h">${A?x.extra.h[1]:x.extra.h[0]}</p><div class="tiles dark">${x.extra.tiles.map((t,i)=>`<div class="tile rv" style="--i:${i}"><span class="ti2">${icon(t[0])}</span><b>${A?t[2]:t[1]}</b></div>`).join('')}</div></div>`:'';
+    p.innerHTML=`<div class="svc-intro"><div class="svc-photo"><img src="${UNS(x.img)}" alt="" loading="lazy"><span class="big">${num}</span></div><p class="eyebrow" style="color:var(--sky)">${A?'الخدمة':'Service'} ${num}</p><h3 class="display">${L(s.h)}</h3><div class="tag-row">${x.tg.map(t=>`<span class="tg">${A?t[1]:t[0]}</span>`).join('')}</div><p>${L(s.p)}</p>${who}<a class="btn btn-primary" href="#start" data-survey="${s.id}" style="justify-self:start">${L(s.cta)}</a>${s.id==='franchise'?`<a class="btn btn-ghost" href="#readiness" style="justify-self:start">${A?'اختبر جاهزية علامتك':'Check your franchise readiness'}</a>`:''}</div><div><p class="panel-h">${A?x.head[1]:x.head[0]}</p>${body}</div>${extra}`;
     panels.appendChild(p);
   });
   bindSurveys();
+  revealIn(document.getElementById('panel-'+curSvc));
+  const on=document.getElementById('tab-'+curSvc); if(on&&tabs.scrollWidth>tabs.clientWidth)tabs.scrollLeft+=on.getBoundingClientRect().left-tabs.getBoundingClientRect().left-24;
+}
+function selectService(id,fromTab){
+  curSvc=id; renderServices();
+  try{history.replaceState(null,'','#service-'+id)}catch(e){}
+  if(fromTab){const t=tabs.getBoundingClientRect(); if(t.top<0||document.getElementById('panel-'+id).getBoundingClientRect().top<0) document.getElementById('services').scrollIntoView({behavior:'smooth'});}
+}
+window.addEventListener('hashchange',()=>{const m=location.hash.match(/^#service-(\w+)$/); if(m&&services.some(s=>s.id===m[1])){selectService(m[1]);document.getElementById('services').scrollIntoView({behavior:'smooth'})}});
+
+/* ---------- clients: logo wall (logos cropped from the company profile) ---------- */
+/* [file slug, brand name]. An empty name means the logo could not be read reliably: it shows in "View all" without a label. */
+const CLIENTS=[['alromansiah','alRomansiah'],['shawarma-w-sos','Shawarma w Sos'],['chef','Chef'],['snack-and-such','Snack & Such'],['mantiqat-al-jambari','Mantiqat Al Jambari'],['client-u13-5',''],['loaded-smokehouse','Loaded Smokehouse'],['client-u13-7',''],['cup-and-couch','Cup & Couch'],['diplab','Diplab'],['keiken','Keiken'],['shrimplus','Shrimplus'],['mr-pasta','Mr Pasta'],['sushiah','Sushiah'],['fateerat-forn','Fateerat Forn'],['hub','Hub'],['shawaya-house','Shawaya House'],['chef-moustache','Chef Moustache'],['manaji','Manaji'],['client-u13-16',''],['lucca','Lucca'],['goodies-selections','Goodies Selections'],['oishii-sushi','Oishii Sushi'],['criollo','Criollo'],['la-storia','La Storia'],['hummus-reefi','Hummus Reefi'],['wafee-pizza','Wafee Pizza'],['client-u13-24',''],['doomi-doo','Doomi Doo'],['bind','Bind'],['burger-lab','Burger Lab'],['quick-wash','Quick Wash'],['hug','HUG'],['karak-and-waffle','Karak & Waffle'],['makarim-najd','Makarim Najd'],['red-mug','Red Mug'],['fatoum','Fatoum'],['tabaqat','Tabaqat'],['reyash','Reyash'],['nano-apex','Nano Apex'],['khan-al-saboun','Khan Al Saboun'],['fatoor-fares','Fatoor Fares'],['white-cup','White Cup'],['dazzle','Dazzle'],['sofret-fayzah','Sofret Fayzah'],['amohamza','AmoHamza'],['feniqia','Feniqia'],['tafaseel','Tafaseel'],['madhyaf','Madhyaf'],['tsc-signature','TSC Signature'],['pita-pack','Pita Pack'],['tang-time','Tang Time'],['flex-kitchen','Flex Kitchen'],['zed-quick','Zed Quick'],['client-u13-50',''],['lannoni','Lannoni'],['client-u13-52',''],['777-burger','777 Burger'],['marzouk','Marzouk'],['melt-ground','Melt Ground'],['wafl','WAFL'],['wagon','Wagon'],['dip-sip','Dip Sip'],['alhamra-albukhari','Alhamra Albukhari'],['hideout','Hideout'],['hataba','Hataba'],['kunafa-factory','Kunafa Factory'],['kababo','Kababo'],['ayyash','Ayyash'],['maqadeer','Maqadeer'],['azizmeal','Azizmeal'],['o-dough','O\'Dough'],['b-tack-burger','B.Tack Burger'],['client-u14-4',''],['delicieuse-crepe','Délicieuse Crêpe'],['relish','Relish'],['client-u14-7',''],['argan-package','Argan Package'],['avenue','Avenue'],['client-u14-13',''],['guaka','Guaka'],['ghazal','Ghazal'],['tbg','TBG'],['jadeel','Jadeel'],['cotton-laundries','Cotton Laundries'],['client-u14-19',''],['body-masters','Body Masters'],['body-motions','Body Motions'],['the-shed','The Shed'],['mubhir','Mubhir'],['al-dakheel','Al Dakheel'],['kebab-hub','Kebab Hub'],['shawarma-dawla','Shawarma Dawla'],['atakoy','Atakoy'],['susam','Susam'],['juice-time','Juice Time'],['wesht','Wesht'],['dough-source','Dough Source'],['shareek','Shareek'],['client-u14-34',''],['fullstop-lounge','Fullstop Lounge'],['biryanak','Biryanak'],['hanoverian','Hanoverian'],['freshway','Freshway'],['rawnah','Rawnah'],['mmmm','Mmmm'],['pizzaram','Pizzaram'],['lamma-burger','Lamma Burger'],['bon-cafe','Bon Café'],['osla-cafe','Osla Café'],['calzey','Calzey'],['antifat','Antifat+'],['shawayat-maqfar','Shawayat Maqfar']];
+const FEATURED=['loaded-smokehouse','burger-lab','cup-and-couch','kunafa-factory','wafl','melt-ground','pita-pack','oishii-sushi','criollo','la-storia','dazzle','snack-and-such','chef','keiken','shrimplus','mr-pasta','wafee-pizza','hummus-reefi','red-mug','777-burger','wagon','dip-sip','flex-kitchen','amohamza','feniqia','tabaqat','reyash','alromansiah','shawaya-house','goodies-selections','kababo','ayyash','maqadeer','azizmeal','o-dough','b-tack-burger','delicieuse-crepe','guaka','jadeel','juice-time','dough-source','fullstop-lounge','biryanak','freshway','rawnah','pizzaram','lamma-burger','bon-cafe','osla-cafe','calzey','antifat','shawayat-maqfar','white-cup','karak-and-waffle','marzouk','hataba'];
+const logoTile=([slug,name],dup)=>`<figure class="lt${name?'':' nn'}${dup?' dup':''}" tabindex="${dup?-1:0}"${dup?' aria-hidden="true"':''}><img src="assets/clients/${slug}.png" alt="${name?esc(name):'Client logo'}" loading="lazy" decoding="async">${name?`<figcaption>${esc(name)}</figcaption>`:''}</figure>`;
+function renderClients(){
+  const f=FEATURED.map(s=>CLIENTS.find(c=>c[0]===s)).filter(Boolean), half=Math.ceil(f.length/2), r1=f.slice(0,half), r2=f.slice(half);
+  const row=(arr,rev)=>`<div class="mq-track${rev?' rev':''}">${arr.map(c=>logoTile(c)).join('')}${arr.map(c=>logoTile(c,1)).join('')}</div>`;
+  document.getElementById('marquee').innerHTML=row(r1)+row(r2,1);
+  const named=CLIENTS.filter(c=>c[1]).sort((a,b)=>a[1].localeCompare(b[1])), un=CLIENTS.filter(c=>!c[1]);
+  document.getElementById('logoGrid').innerHTML=[...named,...un].map(c=>logoTile(c)).join('');
+  const ab=document.getElementById('allBtn'), open=!document.getElementById('logoGrid').hidden;
+  ab.textContent=open?T('Show fewer','عرض أقل'):T(`View all ${CLIENTS.length} brands`,`عرض جميع العلامات (${CLIENTS.length})`);
+}
+document.getElementById('allBtn').addEventListener('click',e=>{const g=document.getElementById('logoGrid');g.hidden=!g.hidden;e.currentTarget.setAttribute('aria-expanded',String(!g.hidden));renderClients()});
+document.addEventListener('click',e=>{const t=e.target.closest('.lt');document.querySelectorAll('.lt.on').forEach(x=>{if(x!==t)x.classList.remove('on')});if(t)t.classList.toggle('on')});
+
+/* ---------- franchise readiness check ---------- */
+const RQ=[
+ {en:'How long has your brand been operating?',ar:'منذ متى تعمل علامتك التجارية؟',o:[['Less than 1 year','أقل من سنة',0],['1–2 years','1–2 سنة',1],['2–3 years','2–3 سنوات',2],['More than 3 years','أكثر من 3 سنوات',3]],
+  gap:['Franchisees and regulators look for a track record. Most brands franchise after 2–3 years of stable operation.','يبحث أصحاب الامتياز والجهات التنظيمية عن سجل أداء. تتجه معظم العلامات إلى الامتياز بعد 2–3 سنوات من التشغيل المستقر.']},
+ {en:'How many branches are operating today?',ar:'كم عدد الفروع العاملة حالياً؟',o:[['Not open yet','لم يُفتتح بعد',0],['1 branch','فرع واحد',1],['2–3 branches','2–3 فروع',2],['4 or more','4 فروع أو أكثر',3]],
+  gap:['A second branch proves the concept works beyond one location and one team.','الفرع الثاني يثبت نجاح العلامة خارج موقع واحد وفريق واحد.']},
+ {en:'Are your branches profitable?',ar:'هل فروعك مربحة؟',o:[['Not yet','ليس بعد',0],['Some of them','بعضها',1],['Most of them','معظمها',2],['All, consistently','جميعها وبشكل مستمر',3]],
+  gap:['Franchisees invest in proven unit economics. Our Profitability Booster can lift margins before you franchise.','يستثمر صاحب الامتياز في نموذج ربحية مثبت. يساعدك معزّز الربحية على رفع الهوامش قبل الامتياز.']},
+ {en:'Is your trademark registered in Saudi Arabia?',ar:'هل علامتك التجارية مسجّلة في المملكة؟',o:[['No','لا',0],['In progress','قيد التسجيل',1],['Yes','نعم',3]],
+  gap:['A registered trademark is required to franchise in Saudi Arabia. Start the registration early.','تسجيل العلامة التجارية شرط للامتياز في المملكة. ابدأ التسجيل مبكراً.']},
+ {en:'Are your operations documented (SOPs, recipes, checklists)?',ar:'هل عملياتك موثّقة (إجراءات التشغيل، الوصفات، قوائم التحقق)؟',o:[['Not documented','غير موثّقة',0],['Partly','جزئياً',1],['Mostly','في معظمها',2],['Fully documented','موثّقة بالكامل',3]],
+  gap:['Manuals are what a franchisee actually buys. A concept survey shows exactly what is missing.','الأدلة هي ما يشتريه صاحب الامتياز فعلياً. يكشف تقييم العلامة التجارية ما ينقصك بالتحديد.']},
+ {en:'Could a new owner run a branch with your training within about 3 months?',ar:'هل يمكن لمالك جديد إدارة فرع بعد تدريبكم خلال 3 أشهر تقريباً؟',o:[['No','لا',0],['Only with heavy help','بمساعدة كبيرة فقط',1],['Probably yes','غالباً نعم',2],['Yes, we have done it','نعم، وقد فعلناها',3]],
+  gap:['A repeatable training program is the core of a franchise system. Franers Academy can help build it.','برنامج تدريب قابل للتكرار هو جوهر منظومة الامتياز. تساعدك أكاديمية فرانرز على بنائه.']}
+];
+const RMAX=RQ.reduce((a,q)=>a+Math.max(...q.o.map(o=>o[2])),0);
+let rdStep=0, rdAns=[];
+function renderReadiness(){
+  const c=document.getElementById('rdCard');
+  if(rdStep<RQ.length){
+    const q=RQ[rdStep];
+    c.innerHTML=`<div class="rd-top"><span>${T('Question','السؤال')} ${rdStep+1} ${T('of','من')} ${RQ.length}</span><span>${Math.round(rdStep/RQ.length*100)}%</span></div>
+    <div class="rd-bar" role="progressbar" aria-valuemin="0" aria-valuemax="${RQ.length}" aria-valuenow="${rdStep}"><i style="width:${rdStep/RQ.length*100}%"></i></div>
+    <p class="rd-q" id="rdQ">${esc(T(q.en,q.ar))}</p>
+    <div class="rd-opts" role="group" aria-labelledby="rdQ">${q.o.map((o,i)=>`<button type="button" class="rd-opt" data-k="${i}" aria-pressed="${rdAns[rdStep]===i}">${esc(T(o[0],o[1]))}</button>`).join('')}</div>
+    ${rdStep?`<button type="button" class="rd-back" id="rdBack">${T('← Back','→ رجوع')}</button>`:''}`;
+    c.querySelectorAll('.rd-opt').forEach(b=>b.onclick=()=>{rdAns[rdStep]=+b.dataset.k;c.querySelectorAll('.rd-opt').forEach(x=>x.setAttribute('aria-pressed',x===b));setTimeout(()=>{rdStep++;renderReadiness()},220)});
+    const bk=document.getElementById('rdBack'); if(bk)bk.onclick=()=>{rdStep--;renderReadiness()};
+    return;
+  }
+  const score=RQ.reduce((a,q,i)=>a+q.o[rdAns[i]][2],0), pct=score/RMAX;
+  const tier=pct>=.75?{k:'full',t:['Ready to franchise','جاهزة للامتياز'],h:['Your brand has the foundations franchisees look for','علامتك تملك الأسس التي يبحث عنها أصحاب الامتياز'],p:['The next step is a complete franchise system. The Full Franchise Kit covers the legal documents, manuals and franchisor tools you need to grow across Saudi Arabia and the GCC.','الخطوة التالية منظومة امتياز متكاملة. تغطي حزمة الامتياز الكاملة المستندات القانونية والأدلة وأدوات مانح الامتياز اللازمة للتوسع في المملكة ودول الخليج.'],cta:['Talk to us about the Full Kit','تحدّث معنا عن الحزمة الكاملة'],sv:'franchise',kit:'full'}
+   :pct>=.45?{k:'partial',t:['Almost ready','قريبة من الجاهزية'],h:['You have a base to build on','لديك أساس جيد للبناء عليه'],p:['Close the gaps below first, or start with the Partial Franchise Kit: the minimum documents required to start franchising, with a clear upgrade path.','عالج الفجوات أدناه أولاً، أو ابدأ بحزمة الامتياز الجزئية: الحد الأدنى من المستندات المطلوبة لبدء الامتياز مع مسار واضح للترقية.'],cta:['Ask about the Partial Kit','استفسر عن الحزمة الجزئية'],sv:'franchise',kit:'partial'}
+   :{k:'found',t:['Build the foundations first','ابنِ الأسس أولاً'],h:['Strengthen the brand before you franchise it','قوِّ علامتك قبل منح امتيازها'],p:['Franchisees buy a proven, documented system. A concept survey and focused solutions will get your brand ready, and we can take you to franchising from there.','يشتري صاحب الامتياز منظومة مثبتة وموثّقة. يجهّز تقييم العلامة التجارية والحلول المركّزة علامتك، ثم ننتقل معك إلى الامتياز.'],cta:['Request a concept survey','اطلب تقييم العلامة التجارية'],sv:'survey'};
+  const gaps=RQ.map((q,i)=>({q,i})).filter(({q,i})=>q.o[rdAns[i]][2]<=1);
+  const C=2*Math.PI*48;
+  c.innerHTML=`<div class="rd-res"><div class="rd-score"><div class="rd-ring"><svg viewBox="0 0 112 112" aria-hidden="true"><circle class="bg" cx="56" cy="56" r="48"/><circle class="fg" cx="56" cy="56" r="48" stroke-dasharray="${C}" stroke-dashoffset="${C}"/></svg><b>${score}<small>/ ${RMAX}</small></b></div>
+    <div><p class="rd-tier">${T(...tier.t)}</p><h3>${T(...tier.h)}</h3></div></div>
+    <p>${T(...tier.p)}</p>
+    ${gaps.length?`<p class="panel-h" style="margin:0">${T('Gaps to close','فجوات تحتاج إلى معالجة')}</p><ul class="rd-gaps">${gaps.map(({q,i})=>`<li><b>${esc(T(q.en,q.ar))}</b>${esc(T(...q.gap))}</li>`).join('')}</ul>`:''}
+    <div class="rd-actions"><button type="button" class="btn btn-primary" id="rdGo">${T(...tier.cta)}</button><button type="button" class="btn btn-ghost" id="rdAgain">${T('Retake the check','أعد الاختبار')}</button></div>
+    <p class="rd-note">${T('This score is indicative. A brand needs assessment confirms the right kit.','هذه النتيجة استرشادية، ويحدد تقييم احتياجات العلامة الحزمة المناسبة.')}</p></div>`;
+  setTimeout(()=>{const fg=c.querySelector('.fg'); if(fg)fg.style.strokeDashoffset=C*(1-pct)},30);
+  document.getElementById('rdAgain').onclick=()=>{rdStep=0;rdAns=[];renderReadiness()};
+  document.getElementById('rdGo').onclick=()=>{openSurvey(tier.sv,{kit:tier.kit});const m=document.getElementById('q-msg'); if(m)m.value=`Franchise readiness check: ${score}/${RMAX} (${tier.t[0]})`;};
 }
 
-/* ---------- clients ---------- */
-const clients=["alRomansiah","Loaded Smokehouse","Chef","Snack & Such","Cup & Couch","Lucca","Goodies Selections","Keiken","Oishii Sushi","Shrimplus","Criollo","La Storia","Hummus Reefi","Wafee Pizza","Mr Pasta","Shawaya House","Burger Lab","Karak & Waffle","Red Mug","Tabaqat","Reyash","Tafaseel","White Cup","Dazzle","Sofret Fayzah","AmoHamza","Feniqia","Madhyaf","Pita Pack","Flex Kitchen","777 Burger","Marzouk","Melt Ground","WAFL","Wagon","Dip Sip","Hataba","Kunafa Factory","Kababo","Ayyash","Maqadeer","Azizmeal","O'Dough","B.Tack Burger","Délicieuse Crêpe","Relish","Guaka","Jadeel","Atakoy","Juice Time","Dough Source","Fullstop Lounge","Biryanak","Freshway","Rawnah","Pizzaram","Lamma Burger","Bon Café","Osla Café","Calzey","Antifat+"];
-document.getElementById('wall').innerHTML=clients.map(c=>`<span>${c.replace(/&/g,'&amp;')}</span>`).join('');
+/* ---------- motion: reveal on scroll, count-up, wave lines ---------- */
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const io='IntersectionObserver' in window&&!reduce?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -40px 0px'}):null;
+function watchReveal(){document.querySelectorAll('.rv:not(.in)').forEach(e=>{if(e.closest('.svc-panel'))return; io?io.observe(e):e.classList.add('in')})}
+function countUp(){document.querySelectorAll('[data-n]').forEach(el=>{const n=+el.dataset.n,s=el.dataset.s||'';if(reduce||!('IntersectionObserver' in window)){el.textContent=n+s;return}
+  el.textContent='0'+s; const ob=new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;ob.disconnect();const t0=performance.now();const tick=t=>{const k=Math.min(1,(t-t0)/1400),v=Math.round(n*(1-Math.pow(1-k,3)));el.textContent=v+s;if(k<1)requestAnimationFrame(tick)};requestAnimationFrame(tick)},{threshold:.6}); ob.observe(el)})}
+function waves(){const W=900,H=520;let d='';for(let i=0;i<22;i++){const o=i*9;d+=`<path d="M0 ${260+o} C ${W*.25} ${120+o*1.6}, ${W*.45} ${420-o}, ${W*.7} ${230+o*.8} S ${W} ${150+o*1.2}, ${W} ${150+o*1.2}"/>`}
+  document.querySelectorAll('.waves').forEach(w=>w.innerHTML=`<svg viewBox="0 0 ${W} ${H}" fill="none" stroke="#FFFFFF" stroke-width="1">${d}</svg>`);
+  const rd=document.querySelector('.readiness .waves svg'); if(rd)rd.setAttribute('stroke','#22A2EA');}
+document.getElementById('storyPlay').addEventListener('click',()=>{const box=document.getElementById('story');const v=document.createElement('video');v.src='assets/video/franers-story.mp4';v.controls=true;v.autoplay=true;v.playsInline=true;v.setAttribute('aria-label',T('Franers story video','فيديو قصة فرانرز'));box.innerHTML='';box.appendChild(v);v.play().catch(()=>{});v.focus()});
+fillIcons(); waves(); countUp();
 
 /* ---------- surveys ---------- */
-const FORM_NAME='franers-survey';
+/* To send submissions automatically from the live site, set FORM_ENDPOINT to a form-to-email service URL
+   (for example a Formspree or FormSubmit endpoint) that forwards to both addresses below. */
+const FORM_ENDPOINT='https://formsubmit.co/ajax/norfali@franers.com';
 const TO=['norfali@franers.com','mtabshi@franers.com'];
 const ROLES=[['Owner / founder','مالك / مؤسس'],['Executive / manager','تنفيذي / مدير'],['Investor','مستثمر'],['Franchisee','صاحب امتياز'],['Starting a new concept','رائد أعمال بعلامة تجارية جديدة'],['Other','أخرى']];
 const CITY=[['Riyadh','الرياض'],['Jeddah','جدة'],['Eastern Province','المنطقة الشرقية'],['Makkah / Madinah','مكة المكرمة / المدينة المنورة'],['Other city in KSA','مدينة أخرى في المملكة'],['Another GCC country','دولة خليجية أخرى']];
@@ -1056,33 +1440,29 @@ function renderLaunch(){
 }
 function field(q){
   const lab=`${esc(T(q.en,q.ar))}${q.req?' <span class="req">*</span>':''}`;
-  if(q.type==='select') return `<div class="sv-q"><label for="q-${q.id}">${lab}</label><select id="q-${q.id}" name="${q.id}" ${q.req?'required':''}><option value="">${T('Select','اختر')}</option>${q.o.map(o=>`<option value="${esc(T(o[0],o[1]))}">${esc(T(o[0],o[1]))}</option>`).join('')}</select></div>`;
-  if(q.type==='multi') return `<fieldset class="sv-q"><legend class="ql">${lab}</legend><div class="opts">${q.o.map((o,i)=>`<div class="opt"><input type="checkbox" id="q-${q.id}-${i}" name="${q.id}" value="${esc(T(o[0],o[1]))}"><label for="q-${q.id}-${i}">${esc(T(o[0],o[1]))}</label></div>`).join('')}</div></fieldset>`;
+  if(q.type==='select') return `<div class="sv-q"><label for="q-${q.id}">${lab}</label><select id="q-${q.id}" name="${q.id}" ${q.req?'required':''}><option value="">${T('Select','اختر')}</option>${q.o.map((o,i)=>`<option value="${i}">${esc(T(o[0],o[1]))}</option>`).join('')}</select></div>`;
+  if(q.type==='multi') return `<fieldset class="sv-q"><legend class="ql">${lab}</legend><div class="opts">${q.o.map((o,i)=>`<div class="opt"><input type="checkbox" id="q-${q.id}-${i}" name="${q.id}" value="${i}"><label for="q-${q.id}-${i}">${esc(T(o[0],o[1]))}</label></div>`).join('')}</div></fieldset>`;
   return `<div class="sv-q field full"><label for="q-${q.id}">${lab}</label><textarea id="q-${q.id}" name="${q.id}" rows="3"></textarea></div>`;
 }
 function openSurvey(key,opts={}){
   curSurvey=SURVEYS[key]?key:'general'; preset=opts; lastFocus=document.activeElement;
   const S=SURVEYS[curSurvey];
   document.getElementById('svTitle').textContent=T(S.en,S.ar);
-  const prim=`<input type="hidden" name="form-name" value="${FORM_NAME}">
-  <input type="hidden" name="survey" value="${esc(S.en)}">
-  <input type="hidden" name="message" value="">
-  <input type="text" name="bot-field" autocomplete="off" tabindex="-1" hidden>
-  <p class="sv-sec">${T('Your details','بياناتك')}</p>
+  const prim=`<p class="sv-sec">${T('Your details','بياناتك')}</p>
   <div class="fields">
    <div class="field"><label for="p-name">${T('Full name','الاسم الكامل')} <span class="req">*</span></label><input id="p-name" name="name" autocomplete="name" required></div>
    <div class="field"><label for="p-phone">${T('Mobile number','رقم الجوال')} <span class="req">*</span></label><input id="p-phone" name="phone" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="+966 5x xxx xxxx" required></div>
    <div class="field"><label for="p-email">${T('Email','البريد الإلكتروني')} <span class="req">*</span></label><input id="p-email" name="email" type="email" autocomplete="email" dir="ltr" required></div>
-   <div class="field"><label for="p-role">${T('Your role','صفتك')} <span class="req">*</span></label><select id="p-role" name="role" required style="font:400 15px var(--body);color:var(--text);background:var(--chip);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%"><option value="">${T('Select','اختر')}</option>${ROLES.map(o=>`<option value="${esc(T(o[0],o[1]))}">${esc(T(o[0],o[1]))}</option>`).join('')}</select></div>
+   <div class="field"><label for="p-role">${T('Your role','صفتك')} <span class="req">*</span></label><select id="p-role" name="role" required style="font:400 15px var(--body);color:var(--text);background:var(--chip);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%"><option value="">${T('Select','اختر')}</option>${ROLES.map((o,i)=>`<option value="${i}">${esc(T(o[0],o[1]))}</option>`).join('')}</select></div>
    <div class="field"><label for="p-co">${T('Company / brand','الشركة / العلامة التجارية')}</label><input id="p-co" name="company" autocomplete="organization"></div>
-   <div class="field"><label for="p-city">${T('City','المدينة')}</label><select id="p-city" name="city" style="font:400 15px var(--body);color:var(--text);background:var(--chip);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%"><option value="">${T('Select','اختر')}</option>${CITY.map(o=>`<option value="${esc(T(o[0],o[1]))}">${esc(T(o[0],o[1]))}</option>`).join('')}</select></div>
+   <div class="field"><label for="p-city">${T('City','المدينة')}</label><select id="p-city" name="city" style="font:400 15px var(--body);color:var(--text);background:var(--chip);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%"><option value="">${T('Select','اختر')}</option>${CITY.map((o,i)=>`<option value="${i}">${esc(T(o[0],o[1]))}</option>`).join('')}</select></div>
   </div>
   <p class="sv-sec">${T('About your request','تفاصيل طلبك')}</p>
   ${S.q.map(field).join('')}
   <p class="err" id="svErr" hidden></p>
   <button class="btn btn-primary" type="submit" style="justify-self:start">${T('Submit request','أرسل الطلب')}</button>`;
   sform.innerHTML=prim; sform.hidden=false; sres.hidden=true;
-  if(curSurvey==='franchise'&&opts.kit){const k=document.getElementById('q-kit'),q=S.q.find(x=>x.id==='kit'); if(k&&q){const o=q.o[opts.kit==='partial'?1:0];k.value=T(o[0],o[1]);}}
+  if(curSurvey==='franchise'&&opts.kit){const k=document.getElementById('q-kit'); if(k) k.value=opts.kit==='partial'?'1':'0';}
   ov.hidden=false; document.body.style.overflow='hidden';
   setTimeout(()=>document.getElementById('p-name').focus(),30);
 }
@@ -1103,33 +1483,87 @@ sform.addEventListener('submit',async e=>{
   const ans=[];
   S.q.forEach(q=>{
     let val='';
-    if(q.type==='select'){val=v(q.id);}
-    else if(q.type==='multi'){val=[...f.querySelectorAll(`input[name="${q.id}"]:checked`)].map(i=>i.value).join(', ');}
+    if(q.type==='select'){const x=v(q.id); val=x===''?'':q.o[+x][0];}
+    else if(q.type==='multi'){val=[...f.querySelectorAll(`input[name="${q.id}"]:checked`)].map(i=>q.o[+i.value][0]).join(', ');}
     else val=v(q.id);
     if(q.req&&!val)missing.push(T(q.en,q.ar));
     if(val)ans.push([q.en,val]);
   });
   if(missing.length){err.textContent=T('Please complete: ','يرجى استكمال: ')+missing.join(T(', ','، '));err.hidden=false;return}
   err.hidden=true;
-  const lines=[`Franers inquiry: ${S.en}`,'',`Name: ${v('name')}`,`Mobile: ${v('phone')}`,`Email: ${v('email')}`,`Role: ${v('role')}`,v('company')?`Company / brand: ${v('company')}`:null,v('city')?`City: ${v('city')}`:null,'',...ans.map(([q,a])=>`${q}: ${a}`)].filter(x=>x!==null).join('\n');
+  const lines=[`Franers inquiry: ${S.en}`,'',`Name: ${v('name')}`,`Mobile: ${v('phone')}`,`Email: ${v('email')}`,`Role: ${ROLES[+v('role')][0]}`,v('company')?`Company / brand: ${v('company')}`:null,v('city')?`City: ${CITY[+v('city')][0]}`:null,'',...ans.map(([q,a])=>`${q}: ${a}`)].filter(x=>x!==null).join('\n');
   const subject=`Franers inquiry: ${S.en} – ${v('name')}`;
   document.getElementById('svSum').textContent=lines;
   document.getElementById('svMail').href=`mailto:${TO.join(',')}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines)}`;
   document.getElementById('svWa1').href='https://wa.me/966567111588?text='+encodeURIComponent(lines);
   document.getElementById('svWa2').href='https://wa.me/966555646479?text='+encodeURIComponent(lines);
   const st=document.getElementById('svStatus');
-  const submit=f.querySelector('[type="submit"]'), payload=new FormData(f);
-  payload.set('form-name',FORM_NAME); payload.set('survey',S.en); payload.set('message',lines);
-  submit.disabled=true; st.textContent=T('Sending your request…','جارٍ إرسال طلبك…');
-  try{
-    const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(payload).toString()});
-    if(!r.ok)throw new Error(`Netlify Forms returned ${r.status}`);
-    st.textContent=T('Thank you. Your request has been sent to our team, and we will contact you shortly.','شكراً لك. تم إرسال طلبك إلى فريقنا وسنتواصل معك قريباً.');
-  }catch(x){
-    st.textContent=T('We could not submit your request automatically. Use email or WhatsApp below to contact us.','تعذّر إرسال طلبك تلقائياً. استخدم البريد الإلكتروني أو واتساب أدناه للتواصل معنا.');
-  }finally{submit.disabled=false;}
+  st.textContent=T('Press "Send by email" to open your email app with the request addressed to Noureldin Orfali and Mohammad Tabshi, then press Send.','اضغط "أرسل بالبريد الإلكتروني" لفتح تطبيق البريد لديك وقد أُعدّ الطلب موجهاً إلى نورالدين أورفلي ومحمد الطبشي، ثم اضغط إرسال.');
+  const btn=f.querySelector('button[type="submit"]'), btnTxt=btn.textContent;
+  btn.disabled=true; btn.textContent=T('Preparing your request…','جارٍ تجهيز طلبك…');
+  const ref=inquiryRef();
+  const details=[['Full name',v('name')],['Mobile',v('phone')],['Email',v('email')],['Role',ROLES[+v('role')][0]],['Company / brand',v('company')||'—'],['City',v('city')?CITY[+v('city')][0]:'—'],['Site language',lang==='ar'?'Arabic':'English']];
+  const request=[['Service requested',S.en],...ans];
+  let pdf=null;
+  try{pdf=await buildInquiryPdf({ref,title:S.en,details,request});}catch(x){pdf=null}
+  lastPdf=pdf?{blob:pdf,name:`Franers-Inquiry-${ref}.pdf`}:null;
+  document.getElementById('svPdf').hidden=!pdf;
+  let sent=false;
+  if(FORM_ENDPOINT){
+    try{
+      if(pdf){
+        /* FormSubmit only accepts attachments on a standard multipart post, so the PDF goes to the non-AJAX endpoint */
+        const fd=new FormData();
+        fd.append('_subject',`${subject} [${ref}]`); fd.append('_cc','mtabshi@franers.com'); fd.append('_template','table'); fd.append('_captcha','false');
+        fd.append('reference',ref); fd.append('name',v('name')); fd.append('email',v('email')); fd.append('phone',v('phone')); fd.append('message',lines);
+        fd.append('attachment',new File([pdf],lastPdf.name,{type:'application/pdf'}));
+        await fetch(FORM_ENDPOINT.replace('/ajax/','/'),{method:'POST',mode:'no-cors',body:fd}); sent=true;
+      }else{
+        const r=await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({_subject:`${subject} [${ref}]`,_cc:'mtabshi@franers.com',_template:'table',_captcha:'false',reference:ref,name:v('name'),email:v('email'),phone:v('phone'),message:lines})});
+        sent=r.ok;
+      }
+    }catch(x){}
+    if(sent)st.textContent=T(`Thank you. Your request (ref. ${ref}) has been sent to our team, and we will contact you shortly.`,`شكراً لك. تم إرسال طلبك (المرجع ${ref}) إلى فريقنا وسنتواصل معك قريباً.`);
+  }
+  btn.disabled=false; btn.textContent=btnTxt;
   sform.hidden=true; sres.hidden=false; sres.scrollIntoView({block:'nearest'});
 });
+
+/* ---------- official PDF of each inquiry (Franers letterhead, tables) ---------- */
+let lastPdf=null;
+function inquiryRef(){const d=new Date(),p=n=>String(n).padStart(2,'0');return `FR-${String(d.getFullYear()).slice(2)}${p(d.getMonth()+1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}${Math.floor(Math.random()*90+10)}`}
+function loadScript(src){return new Promise((res,rej)=>{if(window.html2pdf)return res();const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s)})}
+async function buildInquiryPdf({ref,title,details,request}){
+  await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js');
+  const logo=(document.querySelector('header img.lg.en.l')||{}).src||'';
+  const now=new Date(), date=now.toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'}), time=now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+  const cell='padding:10px 14px;border:1px solid #D6E6F1;font-size:12.5px;vertical-align:top;line-height:1.5';
+  /* the canvas renderer drops spaces between Arabic words, so Arabic text is wrapped here and each line is kept as one unbroken run */
+  const mctx=document.createElement('canvas').getContext('2d'); mctx.font="12.5px Lexend, 'IBM Plex Sans Arabic', Arial";
+  const fmt=val=>{const s=String(val); if(!/[؀-ۿ]/.test(s))return esc(s);
+    return s.split('\n').map(par=>{const out=[];let line='';par.split(/\s+/).filter(Boolean).forEach(w=>{const t=line?line+' '+w:w;if(line&&mctx.measureText(t).width>410){out.push(line);line=w}else line=t});out.push(line);return out.map(l=>esc(l).replace(/ /g,'&nbsp;')).join('<br>')}).join('<br>')};
+  const table=(rows)=>`<table style="width:100%;border-collapse:collapse;margin:0 0 22px">${rows.map(([k,val],i)=>`<tr style="page-break-inside:avoid"><th style="${cell};width:34%;text-align:left;background:${i%2?'#F7FBFE':'#EEF6FC'};color:#064B6E;font-weight:600">${esc(k)}</th><td dir="auto" style="${cell};color:#10364D;white-space:pre-wrap;word-break:break-word">${fmt(val)}</td></tr>`).join('')}</table>`;
+  const h=(t)=>`<div style="font:600 11px 'Lexend',Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#22A2EA;margin:0 0 8px">${t}</div>`;
+  const el=document.createElement('div');
+  el.innerHTML=`<div dir="ltr" lang="en" style="direction:ltr;text-align:left;width:794px;min-height:1120px;box-sizing:border-box;background:#fff;font-family:'Lexend','IBM Plex Sans Arabic',Arial,sans-serif;color:#10364D;position:relative">
+    <div style="height:10px;background:#064B6E"></div><div style="height:4px;background:#22A2EA"></div>
+    <div style="padding:30px 48px 0;display:flex;justify-content:space-between;align-items:flex-start">
+      <img src="${logo}" style="height:46px;width:auto" alt="Franers">
+      <div style="text-align:right;font-size:11.5px;line-height:1.7;color:#4F6B7D">
+        <div style="font-weight:600;color:#064B6E;font-size:12.5px">Client Inquiry Form</div>
+        <div>Ref. <b style="color:#064B6E">${ref}</b></div><div>${date} · ${time}</div></div></div>
+    <div style="padding:22px 48px 6px">
+      <div style="font:400 40px/1 'Bebas Neue',Impact,sans-serif;color:#22A2EA;letter-spacing:.01em;text-transform:uppercase">${esc(title)}</div>
+      <div style="font-size:12px;color:#4F6B7D;margin-top:6px">Submitted through the Franers website survey</div></div>
+    <div style="margin:16px 48px 24px;height:1px;background:#D6E6F1"></div>
+    <div style="padding:0 48px">${h('Client details')}${table(details)}${h('Request details')}${table(request)}
+      <div style="border:1px dashed #22A2EA;background:#F2F8FC;border-radius:8px;padding:12px 14px;font-size:11.5px;color:#4F6B7D;page-break-inside:avoid">For internal use · Assigned to: _______________ · Follow-up date: ___________ · Status: ___________</div></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;padding:14px 48px 18px;border-top:1px solid #D6E6F1;display:flex;justify-content:space-between;font-size:10.5px;color:#4F6B7D">
+      <span><b style="color:#064B6E">Franers</b> · Business growth consultancy · Jeddah &amp; Riyadh, Saudi Arabia</span><span>info@franers.com · franers.com</span></div></div>`;
+  const node=el.firstElementChild;
+  return await html2pdf().set({margin:0,filename:`Franers-Inquiry-${ref}.pdf`,image:{type:'jpeg',quality:.95},html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff'},jsPDF:{unit:'px',format:[794,1123],orientation:'portrait',hotfixes:['px_scaling']},pagebreak:{mode:['css','legacy']}}).from(node).outputPdf('blob');
+}
+document.getElementById('svPdf').addEventListener('click',()=>{if(!lastPdf)return;const a=document.createElement('a');a.href=URL.createObjectURL(lastPdf.blob);a.download=lastPdf.name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)});
 document.getElementById('svCopy').addEventListener('click',e=>copyText(document.getElementById('svSum').textContent,e.currentTarget));
 document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>copyText(b.dataset.copy,b)));
 function copyText(txt,btn){const done=()=>{const o=btn.innerHTML;btn.textContent=lang==='ar'?'تم النسخ':'Copied';setTimeout(()=>btn.innerHTML=o,1400)};try{navigator.clipboard.writeText(txt).then(done,()=>{})}catch(e){}}
@@ -1137,7 +1571,8 @@ function copyText(txt,btn){const done=()=>{const o=btn.innerHTML;btn.textContent
 /* ---------- language ---------- */
 function applyLang(){
   root.dataset.lang=lang; root.lang=lang; root.dir=lang==='ar'?'rtl':'ltr';
-  drawWheel(); select(cur); renderServices(); renderLaunch(); bindSurveys();
+  drawWheel(); select(cur); renderServices(); renderLaunch(); renderClients(); renderReadiness(); bindSurveys(); watchReveal();
+  const sp=document.getElementById('storyPlay'); if(sp)sp.setAttribute('aria-label',T('Play the Franers story video','تشغيل فيديو قصة فرانرز'));
   if(!ov.hidden) openSurvey(curSurvey,preset);
   try{localStorage.setItem('franers-lang',lang)}catch(e){}
 }
