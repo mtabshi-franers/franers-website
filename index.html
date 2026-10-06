@@ -176,7 +176,9 @@ section{padding-block:clamp(56px,8vw,104px)}
 [data-lang="ar"] .seg text{font-family:var(--ar-body);font-size:11px}
 .seg.on path,.seg:hover path{fill:var(--sky)}
 .seg.on text,.seg:hover text{fill:#fff}
-.seg:focus-visible{outline:none}
+/* no box around a clicked or tapped segment; keyboard focus still shows as a white edge on the segment */
+.wheel,.wheel svg,.seg{-webkit-tap-highlight-color:transparent}
+.wheel svg:focus,.seg:focus,.seg:focus-visible{outline:none}
 .seg:focus-visible path{stroke:var(--ink)}
 .hub{position:absolute;inset:28.5%;border-radius:50%;display:grid;place-content:center;text-align:center;padding:10px;background:var(--ground);border:1px solid var(--line)}
 .hub .n{font-family:var(--display);font-size:clamp(34px,6vw,54px);color:var(--sky);line-height:1;font-variant-numeric:tabular-nums}
